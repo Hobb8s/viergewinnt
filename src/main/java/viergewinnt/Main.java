@@ -1,2 +1,6 @@
-package viergewinnt;public class Main {
+package viergewinnt;
+public class Main {
+    public static void main(String[] args) {
+        App.main(args);
+    }
 }
