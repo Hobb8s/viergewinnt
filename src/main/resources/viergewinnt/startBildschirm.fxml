@@ -5,14 +5,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.StartBildschirm">
-    <Button fx:id="btnNutzlos" onAction="#ausgeben">
-
-    </Button>
-   <ImageView fitHeight="482.0" fitWidth="703.0" layoutX="-29.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.StartBildschirm">
+   <ImageView fitHeight="819.0" fitWidth="1038.0" layoutX="-29.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../Bilder/45-450517_horse-head-nebula.jpg" />
       </image>
    </ImageView>
+
+    <Button layoutX="250.0" layoutY="578.0" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" scaleX="1.8" scaleY="1.8" text="Singleplayer" />
+    <Button layoutX="658.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Multiplayer" />
+    <Button layoutX="929.0" layoutY="25.0" mnemonicParsing="false" text="GitHub" />
 
 </AnchorPane>
