@@ -9,5 +9,10 @@
         <module name="viergewinnt" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="test4 (1)" target="11" />
+      <module name="test4 (2)" target="11" />
+      <module name="test4 (3)" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

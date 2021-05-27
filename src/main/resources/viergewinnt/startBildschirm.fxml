@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.StartBildschirm">
+    <Button fx:id="btnNutzlos" onAction="#ausgeben">
+
+    </Button>
+   <ImageView fitHeight="482.0" fitWidth="703.0" layoutX="-29.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Bilder/45-450517_horse-head-nebula.jpg" />
+      </image>
+   </ImageView>
+
+</AnchorPane>

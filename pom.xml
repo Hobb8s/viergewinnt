@@ -24,7 +24,6 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics </artifactId>
             <version>15.0.1</version>
-            <classifier>win</classifier>
         </dependency>
     </dependencies>
     <build>
