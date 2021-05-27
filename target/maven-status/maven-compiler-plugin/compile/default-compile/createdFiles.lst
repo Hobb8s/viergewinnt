@@ -1,8 +1,8 @@
 viergewinnt/Spieler.class
+viergewinnt/Singleplayer.class
+viergewinnt/Muiltiplayer.class
 viergewinnt/Main.class
-viergewinnt/SecondaryController.class
 viergewinnt/App.class
-viergewinnt/PrimaryController.class
 module-info.class
 viergewinnt/StartBildschirm.class
 viergewinnt/VierGewinnt.class

@@ -124,6 +124,7 @@ public class VierGewinnt {
             // links
             if (x - 1 >= 0 &&
                     y  >= 0 &&
+                    VierGewinnt.spielfeld[x - 1].size() > y &&
                     spielfeld[x - 1].get(y) == getAktivenSpieler().getId() &&
                     sindVierInEinerReihe(x - 1, y)) {
                 return true;

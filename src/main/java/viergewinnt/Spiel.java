@@ -137,7 +137,15 @@ public class Spiel {
                 }
             });
         }
-        Spieler istGewonnen = VierGewinnt.istGewonnen(Integer.parseInt(ids[2]), Integer.parseInt(ids[1]));
+
+        try {
+            Button b = (Button) getClass().getDeclaredField(id).get(this);
+            b.setStyle("-fx-background-color: blue;");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Spieler istGewonnen = VierGewinnt.istGewonnen(Integer.parseInt(ids[2]), (Integer.parseInt(ids[1]) - 5) * (-1));
         if(istGewonnen != null/* || VierGewinnt.muliplayerModus && */) {
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setTitle("Fehler");
@@ -151,13 +159,6 @@ public class Spiel {
             // TODO: Zurücksetzen auf den Startbildschirm
 
             return;
-        }
-
-        try {
-            Button b = (Button) getClass().getDeclaredField(id).get(this);
-            b.setText(VierGewinnt.getAktivenSpieler().getFarbe());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         VierGewinnt.spielerWechseln();

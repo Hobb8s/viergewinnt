@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.StartBildschirm">
    <ImageView fitHeight="819.0" fitWidth="1038.0" layoutX="-29.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../Bilder/45-450517_horse-head-nebula.jpg" />
+         <Image url="@/Bilder/45-450517_horse-head-nebula.jpg" />
       </image>
    </ImageView>
 
