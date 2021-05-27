@@ -10,10 +10,15 @@
             <Image url="@../Bilder/45-450517_horse-head-nebula.jpg" />
         </image>
     </ImageView>
-    <Button fx:id="single_zurück" layoutX="113.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Zurück" />
-    <Button fx:id="single_weiter" layoutX="304.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Starten" />
-   <Button layoutX="512.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Verbinden" />
-   <Button layoutX="757.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Server herunterladen" />
+    <Button fx:id="multi_zurück" layoutX="89.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Zurück" />
+    <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Starten" />
+   <Button fx:id="multi_verbinden" layoutX="502.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Verbinden" />
+   <Button fx:id="multi_server_herunterladen" layoutX="727.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Server herunterladen" />
+   <TextField fx:id="multi_namenswahl" layoutX="168.0" layoutY="198.0" scaleX="1.8" scaleY="1.8" text="Name" />
+   <TextField fx:id="multi_internetadresse" layoutX="168.0" layoutY="290.0" scaleX="1.8" scaleY="1.8" text="Internetadresse" />
+   <TextField fx:id="multi_raum_ID" layoutX="630.0" layoutY="290.0" scaleX="1.8" scaleY="1.8" text="Raum ID" />
+   <ListView fx:id="multi_liste" layoutX="108.0" layoutY="345.0" prefHeight="96.0" prefWidth="731.0" />
+   <ColorPicker fx:id="multi_farbwahl" layoutX="624.0" layoutY="198.0" scaleX="1.8" scaleY="1.8" />
 
 
 </AnchorPane>
