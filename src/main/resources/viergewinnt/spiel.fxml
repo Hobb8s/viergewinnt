@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #fff;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.Spiel">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #fff;" stylesheets="@spielbutton.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.Spiel">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
          <image>
