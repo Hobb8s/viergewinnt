@@ -1,5 +1,7 @@
 package viergewinnt;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 public class VierGewinnt {
@@ -40,11 +42,13 @@ public class VierGewinnt {
      * @param spieler Neuer Spieler
      * @throws Exception Wenn schon 2 Spieler hinzugefügt sind, wirft die Methode einen Fehler
      */
-    public static void spielerHinzufuegen(Spieler spieler) throws Exception {
+    public static Spieler spielerHinzufuegen(Spieler spieler) throws Exception {
         if (VierGewinnt.spieler.size() >= 2) {
             throw new Exception("Es sind breits 2 Spieler verhanden");
         }
         VierGewinnt.spieler.add(spieler);
+
+        return spieler;
     }
 
     /**
@@ -53,12 +57,12 @@ public class VierGewinnt {
      * @param farbe Farbe des neuen Spielers
      * @throws Exception Wenn schon 2 Spieler hinzugefügt sind, wirft die Methode einen Fehler
      */
-    public static void spielerHinzufuegen(String name, String farbe) throws Exception {
+    public static Spieler spielerHinzufuegen(String name, Color farbe) throws Exception {
         if (VierGewinnt.spieler.size() >= 2) {
             throw new Exception("Es sind breits 2 Spieler verhanden");
         }
-        VierGewinnt.spieler.add(new Spieler(
-                VierGewinnt.spieler.size() - 1,
+        return VierGewinnt.spielerHinzufuegen(new Spieler(
+                VierGewinnt.spieler.size(),
                 farbe,
                 name
         ));

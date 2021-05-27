@@ -106,19 +106,6 @@ public class Spiel {
     }
 
     public void spielfeldClicked(ActionEvent event) {
-        // Hinzufügen von Spielern
-
-        try {
-            if (VierGewinnt.getSpieler() == null) {
-                VierGewinnt.zuruecksetzen();
-                VierGewinnt.spielerHinzufuegen("Felix", "blau");
-                VierGewinnt.spielerHinzufuegen("Paul", "grün");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
         // Speichere die Id von dem Button, der das Event getriggert hat
         String id = ((Node) event.getSource()).getId();
 
