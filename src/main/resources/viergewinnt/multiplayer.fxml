@@ -14,9 +14,9 @@
     <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Starten" />
    <Button fx:id="multi_verbinden" layoutX="502.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Verbinden" />
    <Button fx:id="multi_server_herunterladen" layoutX="727.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Server herunterladen" />
-   <TextField fx:id="multi_namenswahl" layoutX="168.0" layoutY="130.0" scaleX="1.8" scaleY="1.8" text="Name" />
-   <TextField fx:id="multi_internetadresse" layoutX="168.0" layoutY="245.0" scaleX="1.8" scaleY="1.8" text="Internetadresse" />
-   <TextField fx:id="multi_raum_ID" layoutX="630.0" layoutY="245.0" scaleX="1.8" scaleY="1.8" text="Raum ID" />
+   <TextField fx:id="multi_namenswahl" layoutX="168.0" layoutY="130.0" promptText="Name" scaleX="1.8" scaleY="1.8" />
+   <TextField fx:id="multi_internetadresse" layoutX="168.0" layoutY="245.0" promptText="127.0.0.1:3000" scaleX="1.8" scaleY="1.8" />
+   <TextField fx:id="multi_raum_ID" layoutX="630.0" layoutY="245.0" promptText="Raum ID" scaleX="1.8" scaleY="1.8" />
    <ListView fx:id="multi_liste" layoutX="108.0" layoutY="345.0" prefHeight="96.0" prefWidth="731.0" />
    <ColorPicker fx:id="multi_farbwahl" layoutX="624.0" layoutY="130.0" scaleX="1.8" scaleY="1.8" />
 
