@@ -12,8 +12,8 @@
       </image>
    </ImageView>
 
-    <Button layoutX="250.0" layoutY="578.0" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" scaleX="1.8" scaleY="1.8" text="Singleplayer" />
-    <Button layoutX="658.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Multiplayer" />
-    <Button layoutX="929.0" layoutY="25.0" mnemonicParsing="false" text="GitHub" />
+    <Button fx:id="btn_singleplayer" layoutX="250.0" layoutY="578.0" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" scaleX="1.8" scaleY="1.8" text="Singleplayer" />
+    <Button fx:id="btn_multiplayer" layoutX="658.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Multiplayer" />
+    <Button fx:id="btn_gitHub" layoutX="929.0" layoutY="25.0" mnemonicParsing="false" text="GitHub" />
 
 </AnchorPane>
