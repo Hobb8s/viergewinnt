@@ -1,0 +1,9 @@
+{
+    "watch": [
+        "src/**/",
+        "src/",
+        "./"
+    ],
+    "ext": "ts,json,.env",
+    "exec": "tsc --outDir dist && node dist/index.js"
+}

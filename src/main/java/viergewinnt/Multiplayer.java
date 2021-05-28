@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import javax.json.Json;
+import javax.json.JsonObject;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -63,18 +65,21 @@ public class Multiplayer implements Initializable {
                 public void bearbeiteNachricht(String message) {
                     System.out.println(message);
                     String aktion = javax.json.Json.createReader(new StringReader(message)).readObject().get("aktion").toString();
+                    JsonObject daten = javax.json.Json.createReader(
+                            new StringReader(
+                                    javax.json.Json.createReader(
+                                            new StringReader(message)
+                                    ).readObject()
+                                            .get("daten")
+                                            .toString()
+                            )
+                    ).readObject();
+
+                    System.out.println(daten.toString());
 
                     // Fehler wird angezeigt, wenn der Server einen Fehler meldet
                     if (aktion.equals("error")) {
-                        String err = javax.json.Json.createReader(
-                                new StringReader(
-                                        javax.json.Json.createReader(
-                                                new StringReader(message)
-                                        ).readObject()
-                                                .get("daten")
-                                                .toString()
-                                )
-                        ).readObject()
+                        String err = daten
                                 .get("info")
                                 .toString();
 
@@ -84,23 +89,17 @@ public class Multiplayer implements Initializable {
                         );
                     }
 
-                    if (aktion.equals("error")) {
-                        String err = javax.json.Json.createReader(
-                                new StringReader(
-                                        javax.json.Json.createReader(
-                                                new StringReader(message)
-                                        ).readObject()
-                                                .get("daten")
-                                                .toString()
-                                )
-                        ).readObject()
-                                .get("info")
-                                .toString();
+                    // wenn spieler beigetreten ist
+                    if (aktion.equals("Spieler ist beigetreten")) {
+                        Spieler spieler = Spieler.ladeJson(daten.get("spieler").toString(), 1);
 
-                        System.out.println(err);
-                        Platform.runLater(() ->
-                                zeigeAlert(Alert.AlertType.ERROR, "Server Fehler", err)
-                        );
+                        String[] s = {spieler.toString()};
+                        multi_liste.getItems().addAll(s);
+
+                        try {
+                            VierGewinnt.spielerHinzufuegen(spieler);
+                        } catch (Exception ignored) {}
+
                     }
                 }
             });
@@ -110,7 +109,7 @@ public class Multiplayer implements Initializable {
                             .add("aktion", "trete Raum bei")
                             .add("daten", Json.createObjectBuilder()
                                     .add("raumId", multi_raum_ID.getText())
-                                    .add("spieler", new Gson().toJson(spieler))
+                                    .add("spieler", spieler.toJson())
                             ).build().toString()
             );
 
