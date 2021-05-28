@@ -2,24 +2,16 @@ package viergewinnt;
 
 import javafx.scene.paint.Color;
 
+
+/**
+ * Alle Felder müssen public sein, da diese Klasse in JSON umgewndelt werden soll.
+ */
 public class Spieler {
-    private int id;
-    public int getId() {
-        return id;
-    }
+    public int id;
 
-    private Color farbe;
-    public Color getFarbe() {
-        return farbe;
-    }
-    public String getFarbeAlsString() {
-        return "rgba(" + Math.round(getFarbe().getRed() * 255) + "," + Math.round(getFarbe().getGreen() * 255) + "," + Math.round(getFarbe().getBlue() * 255) + "," + getFarbe().getOpacity() + ")";
-    }
+    public String farbe;
 
-    private String name;
-    public String getName() {
-        return name;
-    }
+    public String name;
 
     public Spieler(
             int id,
@@ -27,12 +19,12 @@ public class Spieler {
             String name
     ) {
         this.id = id;
-        this.farbe = farbe;
+        this.farbe = "rgba(" + Math.round(farbe.getRed() * 255) + "," + Math.round(farbe.getGreen() * 255) + "," + Math.round(farbe.getBlue() * 255) + "," + farbe.getOpacity() + ")";
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return getName() + " Farbe: " + getFarbeAlsString();
+        return name + " Farbe: " + farbe;
     }
 }

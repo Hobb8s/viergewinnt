@@ -136,7 +136,7 @@ public class Spiel {
         if(istGewonnen != null/* || VierGewinnt.muliplayerModus && */) {
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setTitle("Fehler");
-            a.setContentText("Spieler " + istGewonnen.getName() + " hat gewonnen.");
+            a.setContentText("Spieler " + istGewonnen.name + " hat gewonnen.");
             a.showAndWait().ifPresent(rs -> {
                 if (rs == ButtonType.OK) {
                     System.out.println("Pressed OK.");
