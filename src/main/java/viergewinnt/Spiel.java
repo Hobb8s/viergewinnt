@@ -106,19 +106,6 @@ public class Spiel {
     }
 
     public void spielfeldClicked(ActionEvent event) {
-        // Hinzufügen von Spielern
-
-        try {
-            if (VierGewinnt.getSpieler() == null) {
-                VierGewinnt.zuruecksetzen();
-                VierGewinnt.spielerHinzufuegen("Felix", "blau");
-                VierGewinnt.spielerHinzufuegen("Paul", "grün");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
         // Speichere die Id von dem Button, der das Event getriggert hat
         String id = ((Node) event.getSource()).getId();
 
@@ -149,7 +136,7 @@ public class Spiel {
         if(istGewonnen != null/* || VierGewinnt.muliplayerModus && */) {
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setTitle("Fehler");
-            a.setContentText("Spieler " + istGewonnen.getName() + " hat gewonnen.");
+            a.setContentText("Spieler " + istGewonnen.name + " hat gewonnen.");
             a.showAndWait().ifPresent(rs -> {
                 if (rs == ButtonType.OK) {
                     System.out.println("Pressed OK.");
