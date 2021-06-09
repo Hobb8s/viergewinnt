@@ -14,8 +14,14 @@ public class Spieler {
     public int id;
 
     public String farbe;
+    public String getFarbe() {
+        return farbe;
+    }
 
     public String name;
+    public String getName() {
+        return name;
+    }
 
     public Spieler(
             int id,
@@ -57,11 +63,7 @@ public class Spieler {
     public static Spieler ladeJson(String json, int id) {
         JsonObject spieler = javax.json.Json.createReader(
                 new StringReader(
-                        javax.json.Json.createReader(
-                                new StringReader(json)
-                        ).readObject()
-                                .get("daten")
-                                .toString()
+                        json
                 )
         ).readObject();
         return new Spieler(id, spieler.get("farbe").toString(), spieler.get("name").toString());

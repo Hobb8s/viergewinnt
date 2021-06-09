@@ -1,5 +1,7 @@
 package viergewinnt;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -14,8 +16,8 @@ public class VierGewinnt {
         return spielfeld;
     }
 
-    private static ArrayList<Spieler> spieler;
-    public static ArrayList<Spieler> getSpieler() {
+    private static ObservableList<Spieler> spieler;
+    public static ObservableList<Spieler> getSpieler() {
         return spieler;
     }
 
@@ -34,7 +36,7 @@ public class VierGewinnt {
         for (int i = 0; i < spielfeld.length; i++) {
             spielfeld[i] = new ArrayList<Integer>();
         }
-        spieler = new ArrayList<Spieler>();
+        spieler = FXCollections.observableArrayList();
     }
 
     /**

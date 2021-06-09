@@ -1,14 +1,17 @@
 package viergewinnt;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 
 import com.google.gson.Gson;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -32,16 +35,30 @@ public class Multiplayer implements Initializable {
     @FXML
     public TextField multi_raum_ID;
     @FXML
-    public ListView<String> multi_liste;
+    public TableView<Spieler> multi_tableview;
     @FXML
     public ColorPicker multi_farbwahl;
+
 
     private boolean verbunden = false;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         VierGewinnt.zuruecksetzen();
+
+        TableColumn<Spieler, String> name = new TableColumn<Spieler, String>("Name");
+        name.setMinWidth(200);
+        name.setCellValueFactory(new PropertyValueFactory<Spieler, String>("name"));
+
+        TableColumn<Spieler, String> farbe = new TableColumn<Spieler, String>("Farbe");
+        farbe.setMinWidth(200);
+        farbe.setCellValueFactory(new PropertyValueFactory<Spieler, String>("farbe"));
+
+        multi_tableview.setItems(VierGewinnt.getSpieler());
+        multi_tableview.getColumns().addAll(name, farbe);
     }
+
+
 
     public void zurueck() throws IOException {
         App.setRoot("startBildschirm");
@@ -57,31 +74,30 @@ public class Multiplayer implements Initializable {
 
     public void verbinden() {
         try {
-            Spieler spieler = VierGewinnt.spielerHinzufuegen(new Spieler(0, multi_farbwahl.getValue(), multi_namenswahl.getText()));
+            Spieler spieler = new Spieler(0, multi_farbwahl.getValue(), multi_namenswahl.getText());
             // Verbinden
             WebSocketClient viergewinntClient = new WebSocketClient(new URI(multi_internetadresse.getText()));
             viergewinntClient.addMessageHandler(new WebSocketClient.NachrichtenBearbeitung() {
                 @Override
                 public void bearbeiteNachricht(String message) {
                     System.out.println(message);
-                    String aktion = javax.json.Json.createReader(new StringReader(message)).readObject().get("aktion").toString();
-                    JsonObject daten = javax.json.Json.createReader(
-                            new StringReader(
-                                    javax.json.Json.createReader(
-                                            new StringReader(message)
-                                    ).readObject()
-                                            .get("daten")
-                                            .toString()
-                            )
-                    ).readObject();
+                    String aktion = Json.createReader(new StringReader(message)).readObject().get("aktion").toString();
+                    String daten = Json.createReader(
+                            new StringReader(message)
+                    ).readObject()
+                            .get("daten")
+                            .toString();
 
-                    System.out.println(daten.toString());
 
                     // Fehler wird angezeigt, wenn der Server einen Fehler meldet
                     if (aktion.equals("error")) {
-                        String err = daten
-                                .get("info")
-                                .toString();
+                        String err = Json.createReader(
+                                new StringReader(
+                                        daten
+                                )
+                        ).readObject()
+                        .get("info")
+                        .toString();
 
                         System.out.println(err);
                         Platform.runLater(() ->
@@ -91,14 +107,27 @@ public class Multiplayer implements Initializable {
 
                     // wenn spieler beigetreten ist
                     if (aktion.equals("Spieler ist beigetreten")) {
-                        Spieler spieler = Spieler.ladeJson(daten.get("spieler").toString(), 1);
-
-                        String[] s = {spieler.toString()};
-                        multi_liste.getItems().addAll(s);
-
                         try {
+                            JsonArray spielerArray = Json.createReader(
+                                    new StringReader(
+                                            daten
+                                    )
+                            ).readArray();
+
+                            Spieler spieler1 = Spieler.ladeJson(spielerArray.getJsonObject(0).toString(), 0);
+                            Spieler spieler2 = Spieler.ladeJson(spielerArray.getJsonObject(1).toString(), 0);
+
+                            VierGewinnt.spielerHinzufuegen(spieler1);
+                            VierGewinnt.spielerHinzufuegen(spieler2);
+
+                            multi_tableview.setItems(VierGewinnt.getSpieler());
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        /*try {
                             VierGewinnt.spielerHinzufuegen(spieler);
-                        } catch (Exception ignored) {}
+                        } catch (Exception ignored) {}*/
 
                     }
                 }
@@ -114,8 +143,6 @@ public class Multiplayer implements Initializable {
             );
 
             // Lokalen Spieler Erstellen
-            String[] s = {spieler.toString()};
-            multi_liste.getItems().addAll(s);
 
             // Lokalen Spieler an den Server schicken
         } catch (Exception e) {
