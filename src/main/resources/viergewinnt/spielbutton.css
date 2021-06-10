@@ -2,8 +2,10 @@
     -fx-background-color: #870096;
     -fx-background-radius: 15px;
     -fx-text-fill: #ffffff;
-    -fx-width-min: 25
-    -fx-width-max:25
-    -fx-high-min:25
-    -fx-high-max:25
+    -fx-pref-width:25;
+    -fx-pref-height:25;
+    -fx-max-width:25;
+    -fx-min-width:25;
+    -fx-max-height:25;
+    -fx-min-height:25;
 }
