@@ -12,8 +12,8 @@
         </image>
     </ImageView>
 
-    <Button fx:id="single_zurück" layoutX="250.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Zurück" />
-    <Button fx:id="single_weiter" layoutX="658.0" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Starten" />
+    <Button fx:id="single_zurück" layoutX="250.0" onAction="#singlezurück" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Zurück" />
+    <Button fx:id="single_weiter" layoutX="658.0" onAction="#singleweiter" layoutY="578.0" mnemonicParsing="false" scaleX="1.8" scaleY="1.8" text="Starten" />
    <ColorPicker fx:id="single_farbwahl2" layoutX="648.0" layoutY="390.0" scaleX="1.8" scaleY="1.8" />
    <ColorPicker fx:id="single_farbwahl1" layoutX="648.0" layoutY="190.0" scaleX="1.8" scaleY="1.8" />
    <TextField fx:id="single_namenswahl2" layoutX="202.0" layoutY="390.0" promptText="Name" scaleX="1.8" scaleY="1.8" />
