@@ -8,7 +8,7 @@
 
     <ImageView fitHeight="766.0" fitWidth="1012.0" pickOnBounds="true" preserveRatio="true">
         <image>
-            <Image url="@../Bilder/space-1721695_1920.jpg" />
+            <Image url="@../Bilder/hintergrund.jpg" />
         </image>
     </ImageView>
 

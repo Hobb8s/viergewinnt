@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.Multiplayer">
     <ImageView fitHeight="766.0" fitWidth="1012.0" pickOnBounds="true" preserveRatio="true">
         <image>
-            <Image url="@../Bilder/space-1721695_1920.jpg" />
+            <Image url="@../Bilder/hintergrund.jpg" />
         </image>
     </ImageView>
     <Button fx:id="multi_zurueck" layoutX="89.0" layoutY="578.0" mnemonicParsing="false" onAction="#zurueck" scaleX="1.8" scaleY="1.8" text="Zurück" />

@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="750.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/Bilder/space-1721695_1920.jpg" />
+            <Image url="@/Bilder/hintergrund.jpg" />
          </image>
       </ImageView>
       <GridPane layoutX="100.0" layoutY="124.0" prefHeight="600.0" prefWidth="800.0">
