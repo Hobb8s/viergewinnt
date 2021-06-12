@@ -79,6 +79,14 @@ public class VierGewinnt {
 
 
     /**
+     * @param spalte Spalte, von der man die Höhe wissen will
+     * @return Höhe der Spalte
+     */
+    public static int hoeheVonReihe(int spalte) {
+        return VierGewinnt.spielfeld[spalte].size();
+    }
+
+    /**
      * Fügt einen Spielstein in der entsprechen Reihe hinzu
      * @param reihe In welcher Reihe ein Spielstein hinzugefügt werden soll
      * @param spieler Der Spieler, der den Spielstein hinzufügt
@@ -104,9 +112,9 @@ public class VierGewinnt {
     private static boolean sindVierInEinerReihe(int x, int y) {
         try {
             // rechtsunten
-            if (spielfeld.length > x + 1 &&
+            if (spielfeld.length < x + 1 &&
                     y - 1 >= 0 &&
-                    VierGewinnt.spielfeld[x + 1].size() > y - 1 &&
+                    VierGewinnt.spielfeld[x + 1].size() >= y - 1 &&
                     spielfeld[x + 1].get(y - 1) == getAktivenSpieler().id &&
                     sindVierInEinerReihe(x + 1, y - 1)) {
                 return true;
@@ -148,7 +156,8 @@ public class VierGewinnt {
             }
             // rechtsoben
             if (spielfeld.length > x + 3 &&
-                    y >= 6 &&
+                    y >= 0 &&
+                    y + 3 <= 6 &&
                     VierGewinnt.spielfeld[x + 1].size() > y + 1 &&
                     VierGewinnt.spielfeld[x + 2].size() > y + 2 &&
                     VierGewinnt.spielfeld[x + 3].size() > y + 3 &&
@@ -158,7 +167,8 @@ public class VierGewinnt {
                 return true;
             }
             // oben
-            if (y >= 6 &&
+            if (y >= 0 &&
+                    y + 3 <= 6 &&
                     spielfeld[x].get(y + 1) == getAktivenSpieler().id &&
                     spielfeld[x].get(y + 2) == getAktivenSpieler().id &&
                     spielfeld[x].get(y + 3) == getAktivenSpieler().id) {
@@ -166,16 +176,17 @@ public class VierGewinnt {
             }
             // linksoben
             if (x - 3 >= 0 &&
-                    y >= 6 &&
-                    VierGewinnt.spielfeld[x].size() > y + 1 &&
-                    VierGewinnt.spielfeld[x].size() > y + 2 &&
-                    VierGewinnt.spielfeld[x].size() > y + 3 &&
+                    y >= 0 &&
+                    y + 3 <= 6 &&
+                    VierGewinnt.spielfeld[x - 1].size() > y + 1 &&
+                    VierGewinnt.spielfeld[x - 2].size() > y + 2 &&
+                    VierGewinnt.spielfeld[x - 3].size() > y + 3 &&
                     spielfeld[x - 1].get(y + 1) == getAktivenSpieler().id &&
                     spielfeld[x - 2].get(y + 2) == getAktivenSpieler().id &&
                     spielfeld[x - 3].get(y + 3) == getAktivenSpieler().id) {
                 return true;
             }
-        } catch (Exception e) {System.out.println("Reihe: " + VierGewinnt.spielfeld[x]);System.out.println("Size: " + VierGewinnt.spielfeld[x].size());System.out.println(e);}
+        } catch (Exception e) {}
 
 
         return false;

@@ -7,11 +7,11 @@ viergewinnt/Nachrichten$Error.class
 module-info.class
 viergewinnt/Spiel.class
 viergewinnt/Multiplayer.class
-viergewinnt/Nachrichten$Json.class
 viergewinnt/Spieler.class
+viergewinnt/Nachrichten$Json.class
 viergewinnt/Nachrichten$NachrichtMitDaten.class
 viergewinnt/WebSocketClient$NachrichtenBearbeitung.class
-viergewinnt/WebSocketClient.class
 viergewinnt/StartBildschirm.class
+viergewinnt/WebSocketClient.class
 viergewinnt/VierGewinnt.class
 viergewinnt/Nachrichten$Nachricht.class

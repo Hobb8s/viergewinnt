@@ -19,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("multiplayer"), 1000, 750);
+        scene = new Scene(loadFXML("startBildschirm"), 1000, 750);
         stage.setScene(scene);
         stage.show();
 

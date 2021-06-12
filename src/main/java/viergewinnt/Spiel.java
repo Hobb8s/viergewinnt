@@ -124,10 +124,14 @@ public class Spiel {
                 }
             });
         }
-
         try {
-            Button b = (Button) getClass().getDeclaredField(id).get(this);
-            b.setStyle("-fx-background-color: blue;");
+            Button b = (Button) getClass().getDeclaredField(
+                    "spielfeld_"
+                            + ((VierGewinnt.hoeheVonReihe(Integer.parseInt(ids[2])) - 6) * -1)
+                            + "_"
+                            + ids[2]
+            ).get(this);
+            b.setStyle("-fx-background-color: " + VierGewinnt.getAktivenSpieler().farbe + ";");
         } catch (Exception e) {
             e.printStackTrace();
         }

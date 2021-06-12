@@ -1,6 +1,6 @@
-#Viergewinnt
+# Viergewinnt
 Viergewinnt ist eine programmierte Version vom beliebten Strategiespiel Vier gewinnt.
-##Herunterladen
+## Herunterladen
 [Windows](https://github.com/Hobb8s/viergewinnt)
 [Linux](https://github.com/Hobb8s/viergewinnt)
 [Mac OS X](https://github.com/Hobb8s/viergewinnt)
