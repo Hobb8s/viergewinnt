@@ -1,13 +1,15 @@
 package viergewinnt;
 
+import java.util.Optional;
+import java.util.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-
-import java.lang.reflect.Field;
+import java.io.IOException;
+import javafx.scene.control.ProgressBar;
 
 public class Spiel {
 
@@ -95,17 +97,52 @@ public class Spiel {
     public Button spielfeld_5_5;
     @FXML
     public Button spielfeld_5_6;
+    @FXML
+    public Button spielfeld_verlassen;
+    @FXML
+    public Button spielfeld_pause;
+    @FXML
+    public ProgressBar spielfeld_progressbar;
 
+    /**
+     * Bestätigen des Abbrechens des Spiels und Zurückgelangen zur startBildschirm.fxml
+     */
+    public void verlassen() throws IOException
+    {
+        Alert bestätigung = new Alert(Alert.AlertType.CONFIRMATION);
+        bestätigung.setTitle("Verlassen des Spiels");
+        bestätigung.setContentText("Wenn Sie fortfahren, verlassen Sie das Spiel und brechen es somit ab.");
 
-    public void verlassen() {
+        Optional<ButtonType> result = bestätigung.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+            App.setRoot("startBildschirm");
+        }
+        else
+        {
+            bestätigung.close();
+        }
+    }
+
+    public void rueckwaertsProgressBar()
+    {
 
     }
 
-    public void pause() {
+
+
+
+
+    public void pause()
+    {
+
 
     }
 
     public void spielfeldClicked(ActionEvent event) {
+
+
+
         // Speichere die Id von dem Button, der das Event getriggert hat
         String id = ((Node) event.getSource()).getId();
 
