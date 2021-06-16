@@ -1,16 +1,13 @@
 package viergewinnt;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import javax.json.Json;
 import javax.json.JsonArray;
-import javax.json.JsonObject;
 
-import com.google.gson.Gson;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -56,30 +53,45 @@ public class Multiplayer implements Initializable {
 
         multi_tableview.setItems(VierGewinnt.getSpieler());
         multi_tableview.getColumns().addAll(name, farbe);
+        multi_starten.setDisable(true);
     }
 
-
-
-    public void zurueck() throws IOException {
-        App.setRoot("startBildschirm");
-    }
-
+    /**
+     * Wird aufgerufen, wenn der wenn man auf den Button 'Starten' klickt. -> Startet das Spiel
+     * @throws IOException
+     */
     public void start() throws IOException {
-        App.setRoot("spiel");
+        if (verbunden) App.setRoot("spiel");
+        else zeigeAlert(Alert.AlertType.ERROR, "Noch nicht verbunden!", "Sie sind noch nicht mit einem Server verbunden.");
     }
 
-    public void herunterladen () {
+    /**
+     * Öffnet einen Link, dass man den Viergewinnt-Server herrunterladen kann
+     */
+    public void herunterladen() {
         App.app.oeffneWebAdresse("https://github.com/Hobb8s/viergewinnt");
     }
 
+    /**
+     * Wird aufgerufen, wenn der wenn man auf den Button 'Verbinden' klickt.
+     */
     public void verbinden() {
         try {
-            Spieler spieler = new Spieler(0, multi_farbwahl.getValue(), multi_namenswahl.getText());
-            // Verbinden
-            WebSocketClient viergewinntClient = new WebSocketClient(new URI(multi_internetadresse.getText()));
-            viergewinntClient.addMessageHandler(new WebSocketClient.NachrichtenBearbeitung() {
+            // ---------------------------------------------------------------------------------
+            // Verbindet sich mit einem WS-Viergewinnt-Server &
+            // Erstellt ein MessageHandlder: Bearbeitet die Nachrichten, die vom Server kommen
+            // ---------------------------------------------------------------------------------
+
+            WebSocketClient.client = new WebSocketClient(new URI(multi_internetadresse.getText()));
+            WebSocketClient.client.addMessageHandler(new WebSocketClient.NachrichtenBearbeitung() {
                 @Override
                 public void bearbeiteNachricht(String message) {
+
+                    // ---------------------------------------------------------------------------------
+                    // Gibt die Nachricht aus &
+                    // Liest das Json Schema { aktion: string, daten: any }
+                    // ---------------------------------------------------------------------------------
+
                     System.out.println(message);
                     String aktion = Json.createReader(new StringReader(message)).readObject().get("aktion").toString();
                     String daten = Json.createReader(
@@ -88,52 +100,100 @@ public class Multiplayer implements Initializable {
                             .get("daten")
                             .toString();
 
-
+                    // ---------------------------------------------------------------------------------
                     // Fehler wird angezeigt, wenn der Server einen Fehler meldet
+                    // ---------------------------------------------------------------------------------
+
                     if (aktion.equals("error")) {
                         String err = Json.createReader(
                                 new StringReader(
                                         daten
                                 )
                         ).readObject()
-                        .get("info")
-                        .toString();
+                                .get("info")
+                                .toString();
 
                         System.out.println(err);
                         Platform.runLater(() ->
                                 zeigeAlert(Alert.AlertType.ERROR, "Server Fehler", err)
                         );
+                        verbunden = false;
                     }
 
-                    // wenn spieler beigetreten ist
+                    // ---------------------------------------------------------------------------------
+                    // wenn ein Spieler dem Raum beigetreten ist
+                    // ---------------------------------------------------------------------------------
+
                     if (aktion.equals("Spieler ist beigetreten")) {
                         try {
+                            // ---------------------------------------------------------------------------------
+                            // Liest das Json Schema: Spieler[]
+                            // ---------------------------------------------------------------------------------
                             JsonArray spielerArray = Json.createReader(
                                     new StringReader(
                                             daten
                                     )
                             ).readArray();
 
-                            Spieler spieler1 = Spieler.ladeJson(spielerArray.getJsonObject(0).toString(), 0);
-                            Spieler spieler2 = Spieler.ladeJson(spielerArray.getJsonObject(1).toString(), 0);
+                            Spieler spieler1 = Spieler.ladeJson(spielerArray.getJsonObject(0).toString(), 1);
+                            Spieler spieler2 = Spieler.ladeJson(spielerArray.getJsonObject(1).toString(), 1);
 
-                            VierGewinnt.spielerHinzufuegen(spieler1);
-                            VierGewinnt.spielerHinzufuegen(spieler2);
+                            if (!VierGewinnt.getSpieler().get(0).getUuid().equals(spieler1.getUuid()))
+                                VierGewinnt.spielerHinzufuegen(spieler1);
+                            if (!VierGewinnt.getSpieler().get(0).getUuid().equals(spieler2.getUuid()))
+                                VierGewinnt.spielerHinzufuegen(spieler2);
 
                             multi_tableview.setItems(VierGewinnt.getSpieler());
-                        }
-                        catch (Exception e) {
+
+                            multi_starten.setDisable(true);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        /*try {
-                            VierGewinnt.spielerHinzufuegen(spieler);
-                        } catch (Exception ignored) {}*/
+
+                    }
+
+                    // ---------------------------------------------------------------------------------
+                    // wenn ein Spieler ein Raum verlassen hat
+                    // ---------------------------------------------------------------------------------
+
+                    if (aktion.equals("Spieler hat verlassen")) {
+                        try {
+                            // ---------------------------------------------------------------------------------
+                            // Liest das Json Schema: { uuid: string }
+                            // ---------------------------------------------------------------------------------
+                            String uuid = Json.createReader(
+                                    new StringReader(
+                                            daten
+                                    )
+                            ).readObject().get("uuid").toString();
+
+                            // ---------------------------------------------------------------------------------
+                            // Löscht den Spieler aus der Spielerliste &
+                            // aktualisiert die Tableview
+                            // ---------------------------------------------------------------------------------
+
+                            VierGewinnt.spielerEntfernen(uuid);
+
+                            multi_tableview.setItems(VierGewinnt.getSpieler());
+
+                            multi_starten.setDisable(false);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }
             });
-            // Sende "trete Raum bei"
-            viergewinntClient.sendMessage(
+
+            // ---------------------------------------------------------------------------------
+            // Erstellt einen neuen Spieler
+            // Sende "trete Raum bei" mit dem erstellten Spieler; Json Schema: { aktion: "trete Raum bei", spieler: Spieler } &
+            // Löscht den Spieler aus der Spielerliste &
+            // aktualisiert die Tableview
+            // ---------------------------------------------------------------------------------
+
+            Spieler spieler = new Spieler(0, multi_farbwahl.getValue(), multi_namenswahl.getText()).setUuid();
+            WebSocketClient.client.sendMessage(
                     Json.createObjectBuilder()
                             .add("aktion", "trete Raum bei")
                             .add("daten", Json.createObjectBuilder()
@@ -141,20 +201,42 @@ public class Multiplayer implements Initializable {
                                     .add("spieler", spieler.toJson())
                             ).build().toString()
             );
+            VierGewinnt.spielerHinzufuegen(spieler);
+            multi_tableview.setItems(VierGewinnt.getSpieler());
 
-            // Lokalen Spieler Erstellen
+            verbunden = true;
 
-            // Lokalen Spieler an den Server schicken
+            multi_verbinden.setDisable(true);
         } catch (Exception e) {
             zeigeAlert(Alert.AlertType.ERROR, "Fehler", e.getMessage());
         }
 
     }
 
+
+    /**
+     * Wird aufgerufen, wenn auf den Button 'Zurück' geklickt wird.
+     */
+    public void zurueck() throws IOException {
+        
+        if (verbunden)
+            WebSocketClient.client.sendMessage(
+                Json.createObjectBuilder()
+                        .add("aktion", "verlasse Raum")
+                        .add("daten", Json.createObjectBuilder()
+                                .add("raumId", multi_raum_ID.getText())
+                                .add("spieler", VierGewinnt.getSpieler().get(0).toJson())
+                        ).build().toString()
+            );
+
+        App.setRoot("startBildschirm");
+    }
+
     public void zeigeAlert(Alert.AlertType typ, String titel, String nachricht) {
         Alert a = new Alert(typ);
         a.setTitle(titel);
         a.setContentText(nachricht);
-        a.showAndWait().ifPresent(rs -> {});
+        a.showAndWait().ifPresent(rs -> {
+        });
     }
 }

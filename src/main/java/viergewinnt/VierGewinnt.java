@@ -67,7 +67,17 @@ public class VierGewinnt {
                 VierGewinnt.spieler.size(),
                 farbe,
                 name
-        ));
+        ).setUuid());
+    }
+
+    /**
+     * Entfernt ein Spieler mit der uuid
+     * @param uuid
+     * @return
+     * @throws Exception
+     */
+    public static void spielerEntfernen(String uuid) throws Exception {
+        spieler = VierGewinnt.getSpieler().filtered(spieler -> !spieler.getUuid().equals(uuid));
     }
 
     /**

@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.raumVerlassen = exports.raumBeitreten = exports.WebSocketRaum = void 0;
+exports.sucheRaumIdVonWs = exports.raumVerlassen = exports.raumBeitreten = exports.WebSocketRaum = void 0;
 class WebSocketRaum {
     constructor(name) {
         this.name = name;
-        this.wsl = [];
-        this.spieler = [];
+        this._wsl = [];
+        this._spieler = [];
         if (Object.keys(WebSocketRaum.räume).findIndex((v) => name == v) != -1)
             throw 'Raum kann nicht erstellt werden';
         WebSocketRaum.räume[name] = this;
@@ -13,24 +13,30 @@ class WebSocketRaum {
     static raum(name) {
         return WebSocketRaum.räume[name];
     }
+    get wsl() {
+        return this._wsl;
+    }
+    get spieler() {
+        return this._spieler;
+    }
     get size() {
-        return this.wsl.length;
+        return this._wsl.length;
     }
     beitreten(ws, s) {
-        this.wsl.push(ws);
-        this.spieler.push(s);
+        this._wsl.push(ws);
+        this._spieler.push(s);
         return this;
     }
     verlassen(ws) {
-        this.wsl.splice(this.wsl.findIndex((v) => v == ws), 1);
-        this.spieler.splice(this.wsl.findIndex((v) => v == ws), 1);
+        this._wsl.splice(this._wsl.findIndex((v) => v == ws), 1);
+        this._spieler.splice(this._wsl.findIndex((v) => v == ws), 1);
         if (this.size === 0)
             delete WebSocketRaum.räume[this.name];
         else
             return this;
     }
     senden(data, ws) {
-        this.wsl.forEach((socket) => {
+        this._wsl.forEach((socket) => {
             if (ws == undefined || ws != socket)
                 socket.send(data);
         });
@@ -55,4 +61,11 @@ function raumVerlassen(raumId, ws) {
     throw `Der Raum ${raumId} exsistiert nicht.`;
 }
 exports.raumVerlassen = raumVerlassen;
+function sucheRaumIdVonWs(ws) {
+    for (const wsr in WebSocketRaum.räume) {
+        if (WebSocketRaum.räume[wsr].wsl.findIndex((v) => v == ws) != -1)
+            return wsr;
+    }
+}
+exports.sucheRaumIdVonWs = sucheRaumIdVonWs;
 //# sourceMappingURL=WebSocket.js.map

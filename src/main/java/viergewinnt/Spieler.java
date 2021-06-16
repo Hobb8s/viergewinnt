@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import javax.json.Json;
 import javax.json.JsonObject;
 import java.io.StringReader;
+import java.util.UUID;
 
 
 /**
@@ -21,6 +22,20 @@ public class Spieler {
     public String name;
     public String getName() {
         return name;
+    }
+
+    private String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+    public Spieler setUuid() {
+        this.uuid = UUID.randomUUID().toString();
+        return this;
+    }
+    public Spieler setUuid(String uuid) {
+        this.uuid = uuid;
+        return this;
     }
 
     public Spieler(
@@ -55,6 +70,7 @@ public class Spieler {
     public JsonObject toJson() {
         return Json.createObjectBuilder()
                 .add("id", id)
+                .add("uuid", uuid)
                 .add("farbe", farbe)
                 .add("name", name)
                 .build();
@@ -66,6 +82,7 @@ public class Spieler {
                         json
                 )
         ).readObject();
-        return new Spieler(id, spieler.get("farbe").toString(), spieler.get("name").toString());
+        return new Spieler(id, spieler.get("farbe").toString(), spieler.get("name").toString()).setUuid(spieler.get("uuid").toString());
     }
 }
+

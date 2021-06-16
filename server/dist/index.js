@@ -62,15 +62,16 @@ ${chalk_1.default.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt 
     }
     spinnerInternetverbindung.succeed();
     // Initialisiere Websocket Server
-    const spinnerStarteSocketIO = ora_1.default('Starte socket.io').start();
+    const spinnerStarteSocketIO = ora_1.default('Starte Websocket').start();
     const server = new http_1.Server();
     const wss = new ws_1.Server({ server });
     wss.on('connection', (ws) => {
         ws.on('message', (nachricht) => {
             console.log(JSON.parse(nachricht));
+            // ---------------------------------------------------------------------------------
             // trete Raum bei
-            if (JSON.parse(nachricht).aktion ===
-                'trete Raum bei') {
+            // ---------------------------------------------------------------------------------
+            if (JSON.parse(nachricht).aktion === 'trete Raum bei') {
                 const { raumId, spieler } = JSON.parse(nachricht).daten;
                 try {
                     const raum = WebSocket_1.raumBeitreten(raumId, ws, spieler, ErstelleAutomatischRäume);
@@ -86,8 +87,7 @@ ${chalk_1.default.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt 
                     raum.senden(JSON.stringify({
                         aktion: 'Spieler ist beigetreten',
                         daten: raum.spieler,
-                    }), ws);
-                    console.log(WebSocket_1.WebSocketRaum.räume);
+                    }));
                 }
                 catch (e) {
                     ws.send(JSON.stringify({
@@ -98,12 +98,13 @@ ${chalk_1.default.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt 
             }
             // ---------------------------------------------------------------------------------
             // verlasse Raum
+            // ---------------------------------------------------------------------------------
             if (JSON.parse(nachricht).aktion === 'verlasse Raum') {
-                const { raumId, spieler } = JSON.parse(nachricht).daten;
+                const { raumId, spieler: { uuid }, } = JSON.parse(nachricht).daten;
                 try {
-                    WebSocket_1.raumVerlassen(raumId, ws)?.senden(JSON.stringify({
+                    const r = WebSocket_1.raumVerlassen(raumId, ws)?.senden(JSON.stringify({
                         aktion: 'Spieler hat verlassen',
-                        daten: { spieler },
+                        daten: { uuid },
                     }));
                 }
                 catch (e) {
@@ -115,6 +116,7 @@ ${chalk_1.default.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt 
             }
             // ---------------------------------------------------------------------------------
             // verlasse Raum
+            // ---------------------------------------------------------------------------------
             // if (
             //     (JSON.parse(nachricht) as Nachricht).aktion === 'verlasse Raum'
             // ) {
@@ -140,51 +142,12 @@ ${chalk_1.default.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt 
             //     }
             // }
         });
+        ws.on('close', (c, r) => {
+            const raumId = WebSocket_1.sucheRaumIdVonWs(ws);
+            if (raumId)
+                WebSocket_1.raumVerlassen(raumId, ws);
+        });
     });
-    // Initialisiere socket.io
-    // const io = new IoServer(server)
-    // Wenn ein Client sich mit dem Server verbindet
-    // io.on('connection', (socket: Socket) => {
-    //     // Verbindung erstellt
-    //     socket.on(
-    //         'verbinde mit Raum',
-    //         ({ raumId, spieler }: VerbindungAnfrage) => {
-    //             if (
-    //                 !ErstelleAutomatischRäume &&
-    //                 räume.findIndex((v) => v == raumId) == -1
-    //             )
-    //                 socket.emit(
-    //                     'error',
-    //                     `Fehler beim verbinden mit dem Raum '${raumId}'.`
-    //                 )
-    //             const raum = io.of('/').adapter.rooms.get(raumId)
-    //             if (raum && raum.size >= 2)
-    //                 socket.emit(
-    //                     'error',
-    //                     `Der Raum '${raumId}' ist bereits voll.`
-    //                 )
-    //             // Verbindet den Client mit einem Raum und teilt die Verbindung allen Clients im Raum mit
-    //             socket.join(raumId)
-    //             socket.to(raumId).emit('Spieler tritt bei', spieler)
-    //         }
-    //     )
-    //     // Verbindung getrennt
-    //     socket.on(
-    //         'trenne von Raum',
-    //         ({ raumId, spieler }: VerbindungAnfrage) => {
-    //             socket.to(raumId).emit('Spieler verlässt', spieler)
-    //             socket.leave(raumId)
-    //         }
-    //     )
-    //     // Spiel beendet
-    //     socket.on('beende', ({ raumId, nachricht }: Spielende) => {
-    //         socket.to(raumId).emit('beende', nachricht)
-    //     })
-    //     // Spiel Update
-    //     socket.on('update', ({ raumId, spieler, update }: Spielupdate) => {
-    //         socket.to(raumId).emit('update', { spieler, update })
-    //     })
-    // })
     server.listen(Number(Port), async () => {
         spinnerStarteSocketIO.succeed(`Server läuft unter Port ${Port}`);
         const addresse = `ws://${await findeEigeneIpAdresse()}:${Port}`;
@@ -195,9 +158,9 @@ ${chalk_1.default.black.bgCyanBright('Local:   ')} ws://127.0.0.1:${Port}
 ${chalk_1.default.black.bgGreen('Netzwerk:')} ${addresse} ${chalk_1.default.gray('Diese Adresse wurde in die Zwischenablage kopiert.')}
 
 ${chalk_1.default.black.bgYellow('Achtung: ')} Wenn Sie mit jemandem außerhalb ihres Heimnetzwerkes spielen wollen,
-          müssen Sie eventuell den Port ${Port} für dieses Gerät freigeben.
+		  müssen Sie eventuell den Port ${Port} für dieses Gerät freigeben.
 
-${chalk_1.default.bgRed('Wenn Sie den Server beenden wollen, dücken sie Strg+C.')}        
+${chalk_1.default.bgRed('Wenn Sie den Server beenden wollen, dücken sie Strg+C.')}
 `);
     });
 })();
