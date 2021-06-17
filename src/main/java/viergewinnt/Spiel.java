@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import java.io.IOException;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Alert.AlertType;
 
 public class Spiel {
 
@@ -122,16 +123,14 @@ public class Spiel {
         {
             bestätigung.close();
         }
+
+        
     }
 
     public void rueckwaertsProgressBar()
     {
 
     }
-
-
-
-
 
     public void pause()
     {
