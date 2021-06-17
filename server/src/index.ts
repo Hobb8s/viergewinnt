@@ -149,7 +149,7 @@ ${chalk.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt Servers')}
 				).daten
 
 				try {
-					const r = raumVerlassen(raumId, ws)?.senden(
+					raumVerlassen(raumId, ws)?.senden(
 						JSON.stringify({
 							aktion: 'Spieler hat verlassen',
 							daten: { uuid },

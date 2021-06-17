@@ -1,5 +1,5 @@
 .spielbutton{
-    -fx-background-color: #870096;
+    -fx-background-color: #ffffff;
     -fx-background-radius: 15px;
     -fx-text-fill: #ffffff;
     -fx-pref-width:25;
@@ -8,4 +8,32 @@
     -fx-min-width:25;
     -fx-max-height:25;
     -fx-min-height:25;
+}
+
+.rot{
+    -fx-background-color: #FA5858;
+    -fx-text-fill: #000000;
+    -fx-opacity: 0.9;
+}
+
+.gelb{
+    -fx-background-color: #F7FE2E;
+    -fx-text-fill: #000000;
+    -fx-opacity: 0.8;
+}
+
+.gruen{
+    -fx-background-color: #64FE2E;
+    -fx-text-fill: #000000;
+    -fx-opacity: 0.8;
+}
+
+.blau{
+    -fx-background-color: #5882FA;
+    -fx-text-fill: #000000;
+    -fx-opacity: 0.8;
+}
+
+.transparent{
+    -fx-opacity: 0.8;
 }

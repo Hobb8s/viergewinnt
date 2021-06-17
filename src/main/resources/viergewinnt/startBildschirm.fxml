@@ -4,15 +4,15 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.StartBildschirm">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@spielbutton.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.StartBildschirm">
    <ImageView fitHeight="819.0" fitWidth="1038.0" layoutX="-29.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@/Bilder/hintergrund.jpg" />
+         <Image url="@../Bilder/hintergrund.jpg" />
       </image>
    </ImageView>
 
-    <Button fx:id="btn_singleplayer" layoutX="250.0" onAction="#singleplayerÖffnen" layoutY="578.0" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" scaleX="2.5" scaleY="2.5" text="Singleplayer" />
-    <Button fx:id="btn_multiplayer" layoutX="658.0" onAction="#multiplayerÖffnen" layoutY="578.0" mnemonicParsing="false" scaleX="2.5" scaleY="2.5" text="Multiplayer" />
-    <Button fx:id="btn_gitHub" layoutX="929.0" onAction="#gitHubÖffnen" layoutY="25.0" mnemonicParsing="false" text="GitHub" />
+    <Button fx:id="btn_singleplayer" layoutX="250.0" layoutY="578.0" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" onAction="#singleplayerÖffnen" prefHeight="25.0" prefWidth="90.0" scaleX="2.5" scaleY="2.5" text="Singleplayer" />
+    <Button fx:id="btn_multiplayer" layoutX="658.0" layoutY="578.0" mnemonicParsing="false" onAction="#multiplayerÖffnen" scaleX="2.5" scaleY="2.5" text="Multiplayer" />
+    <Button fx:id="btn_gitHub" layoutX="929.0" layoutY="25.0" mnemonicParsing="false" onAction="#gitHubÖffnen" text="GitHub" />
 
 </AnchorPane>

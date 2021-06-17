@@ -2,22 +2,24 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sucheRaumIdVonWs = exports.raumVerlassen = exports.raumBeitreten = exports.WebSocketRaum = void 0;
 class WebSocketRaum {
-    constructor(name) {
-        this.name = name;
-        this._wsl = [];
-        this._spieler = [];
-        if (Object.keys(WebSocketRaum.räume).findIndex((v) => name == v) != -1)
-            throw 'Raum kann nicht erstellt werden';
-        WebSocketRaum.räume[name] = this;
-    }
+    name;
+    static räume = {};
     static raum(name) {
         return WebSocketRaum.räume[name];
     }
+    _wsl = [];
     get wsl() {
         return this._wsl;
     }
+    _spieler = [];
     get spieler() {
         return this._spieler;
+    }
+    constructor(name) {
+        this.name = name;
+        if (Object.keys(WebSocketRaum.räume).findIndex((v) => name == v) != -1)
+            throw 'Raum kann nicht erstellt werden';
+        WebSocketRaum.räume[name] = this;
     }
     get size() {
         return this._wsl.length;
@@ -43,7 +45,6 @@ class WebSocketRaum {
     }
 }
 exports.WebSocketRaum = WebSocketRaum;
-WebSocketRaum.räume = {};
 function raumBeitreten(raumId, ws, s, automatischErstellen = true) {
     if (automatischErstellen &&
         Object.keys(WebSocketRaum.räume).findIndex((v) => raumId == v) == -1)
