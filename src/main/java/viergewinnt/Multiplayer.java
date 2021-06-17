@@ -99,7 +99,6 @@ public class Multiplayer implements Initializable {
 				public void bearbeiteNachricht(String message) {
 
 					// ---------------------------------------------------------------------------------
-					// Gibt die Nachricht aus &
 					// Liest das Json Schema { aktion: string, daten: any }
 					// ---------------------------------------------------------------------------------
 
