@@ -4,14 +4,9 @@ viergewinnt\Singleplayer.class
 viergewinnt\App.class
 viergewinnt\WebSocketClient$NachrichtenBearbeitung.class
 viergewinnt\StartBildschirm.class
-viergewinnt\Nachrichten$Nachricht.class
-viergewinnt\Multiplayer.class
-module-info.class
-viergewinnt\Nachrichten.class
-viergewinnt\VierGewinnt.class
-viergewinnt\Nachrichten$Error.class
 viergewinnt\Spieler.class
 viergewinnt\WebSocketClient.class
-viergewinnt\Nachrichten$Json.class
+viergewinnt\Multiplayer.class
+module-info.class
+viergewinnt\VierGewinnt.class
 viergewinnt\Multiplayer$1.class
-viergewinnt\Nachrichten$NachrichtMitDaten.class

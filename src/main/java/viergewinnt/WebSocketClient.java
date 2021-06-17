@@ -9,6 +9,7 @@ public class WebSocketClient {
 
     private Session s = null;
     private NachrichtenBearbeitung nachrichtenBearbeitung;
+    public String raumId = null;
 
     public WebSocketClient (URI uri) throws Exception {
 

@@ -1,9 +1,8 @@
 module org.example {
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires javax.json.api;
-    requires javax.websocket.client.api;
-    requires com.google.gson;
+    requires transitive javafx.controls;
+    requires transitive javafx.fxml;
+    requires transitive javax.json.api;
+    requires transitive javax.websocket.client.api;
 
     opens viergewinnt to javafx.fxml;
     exports viergewinnt;

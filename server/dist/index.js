@@ -115,32 +115,17 @@ ${chalk_1.default.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt 
                 }
             }
             // ---------------------------------------------------------------------------------
-            // verlasse Raum
+            // Spieler wird bereit;
+            // Wenn beide breit sind, wird das Spiel gestartet
             // ---------------------------------------------------------------------------------
-            // if (
-            //     (JSON.parse(nachricht) as Nachricht).aktion === 'verlasse Raum'
-            // ) {
-            //     const { raumId, spieler } = (
-            //         JSON.parse(
-            //             nachricht
-            //         ) as NachrichtMitDaten<VerbindungAnfrage>
-            //     ).daten
-            //     try {
-            //         raumVerlassen(raumId, ws)?.senden(
-            //             JSON.stringify({
-            //                 aktion: 'Spieler hat verlassen',
-            //                 daten: { spieler },
-            //             } as NachrichtMitDaten<any>)
-            //         )
-            //     } catch (e) {
-            //         ws.send(
-            //             JSON.stringify({
-            //                 aktion: 'error',
-            //                 daten: { info: e },
-            //             } as NachrichtMitDaten<Error>)
-            //         )
-            //     }
-            // }
+            if (JSON.parse(nachricht).aktion === 'Bereit') {
+                const { raumId, uuid } = JSON.parse(nachricht).daten;
+                const raum = WebSocket_1.WebSocketRaum.räume[raumId];
+                if (raum.spieler.filter(spieler => spieler.ready).length > 0)
+                    raum.senden(JSON.stringify({ aktion: 'Bereit', daten: {} }));
+                else
+                    raum.spieler.filter(spieler => spieler.uuid == uuid)[0].ready = true;
+            }
         });
         ws.on('close', (c, r) => {
             const raumId = WebSocket_1.sucheRaumIdVonWs(ws);
