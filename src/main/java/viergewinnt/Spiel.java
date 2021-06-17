@@ -2,6 +2,7 @@ package viergewinnt;
 
 import java.util.Optional;
 import java.util.Timer;
+import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -11,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import java.io.IOException;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Alert.AlertType;
+
 
 public class Spiel {
 
@@ -105,11 +107,13 @@ public class Spiel {
     @FXML
     public ProgressBar spielfeld_progressbar;
 
+
     /**
      * Bestätigen des Abbrechens des Spiels und Zurückgelangen zur startBildschirm.fxml
      */
     public void verlassen() throws IOException
     {
+        PauseZahl = 2;
         Alert bestätigung = new Alert(Alert.AlertType.CONFIRMATION);
         bestätigung.setTitle("Verlassen des Spiels");
         bestätigung.setContentText("Wenn Sie fortfahren, verlassen Sie das Spiel und brechen es somit ab.");
@@ -118,29 +122,93 @@ public class Spiel {
         if (result.get() == ButtonType.OK)
         {
             App.setRoot("startBildschirm");
+            PauseZahl = 0;
         }
         else
         {
             bestätigung.close();
+            PauseZahl = 1;
         }
-
-        
     }
 
-    public void rueckwaertsProgressBar()
+    /**
+     verbleibendeZeit = Zeit, die den beiden Spielern noch verbleibt, um das Spiel zu beenden
+     PauseZahl = Erklärung folgt bei der Methode pause()
+     */
+    int verbleibendeZeit = 20;
+    int PauseZahl = 0;
+
+
+    public void rueckwaertsProgressBar() {
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                if (verbleibendeZeit > 0)
+                {
+                    if (PauseZahl == 1) {
+                        verbleibendeZeit = verbleibendeZeit - 1;
+                        // spielfeld_progressbar.setValue(verbleibendeZeit);
+                        System.out.println(verbleibendeZeit);
+                    }
+                }
+                else
+                {
+                    timer.cancel();
+                    System.out.println("Die Zeit ist abgelaufen.");
+                    ZeitAlert();
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 1000, 1000);
+
+    }
+
+    public void ZeitAlert()
     {
-
+        Alert zeitVorbei = new Alert(AlertType.CONFIRMATION);
+        zeitVorbei.setTitle("Ablauf der Zeit");
+        zeitVorbei.setContentText("Leider waren Sie zu langsam und die Zeit ist abgelaufen.");
+        zeitVorbei.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                try {
+                    App.setRoot("startBildschirm");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
+    /**
+    Pausezahl: 0 & 2 = Zeit steht bzw. läuft nicht   (Unterschied: Text -> Start oder Weiter)
+               1 = Zeit läuft
+     */
     public void pause()
     {
-
-
+        if (PauseZahl == 0)
+        {
+            rueckwaertsProgressBar();
+            PauseZahl = 1;
+            spielfeld_pause.setText("Pause");
+        }
+        else
+        {
+            if (PauseZahl == 1)
+            {
+                PauseZahl = 2;
+                spielfeld_pause.setText("Weiter");
+            }
+            else
+            {
+                PauseZahl = 1;
+                spielfeld_pause.setText("Pause");
+            }
+        }
     }
 
+
     public void spielfeldClicked(ActionEvent event) {
-
-
 
         // Speichere die Id von dem Button, der das Event getriggert hat
         String id = ((Node) event.getSource()).getId();
