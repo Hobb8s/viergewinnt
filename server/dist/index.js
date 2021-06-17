@@ -102,7 +102,7 @@ ${chalk_1.default.bold.bgBlue('Willkommen bei der Installation des Vier Gewinnt 
             if (JSON.parse(nachricht).aktion === 'verlasse Raum') {
                 const { raumId, spieler: { uuid }, } = JSON.parse(nachricht).daten;
                 try {
-                    const r = WebSocket_1.raumVerlassen(raumId, ws)?.senden(JSON.stringify({
+                    WebSocket_1.raumVerlassen(raumId, ws)?.senden(JSON.stringify({
                         aktion: 'Spieler hat verlassen',
                         daten: { uuid },
                     }));

@@ -15,6 +15,7 @@ import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class Multiplayer implements Initializable {
     @FXML
@@ -207,6 +208,7 @@ public class Multiplayer implements Initializable {
             verbunden = true;
 
             multi_verbinden.setDisable(true);
+ 
         } catch (Exception e) {
             zeigeAlert(Alert.AlertType.ERROR, "Fehler", e.getMessage());
         }

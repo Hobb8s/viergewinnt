@@ -121,36 +121,48 @@ public class VierGewinnt {
 
     private static boolean sindVierInEinerReihe(int x, int y) {
         try {
+            
             // rechtsunten
-            if (spielfeld.length < x + 1 &&
-                    y - 1 >= 0 &&
-                    VierGewinnt.spielfeld[x + 1].size() >= y - 1 &&
+            if (spielfeld.length > x + 3 &&
+                    y >= 0 &&
+                    y + 3 <= 6 &&
+                    VierGewinnt.spielfeld[x + 1].size() > y - 1 &&
+                    VierGewinnt.spielfeld[x + 2].size() > y - 2 &&
+                    VierGewinnt.spielfeld[x + 3].size() > y - 3 &&
                     spielfeld[x + 1].get(y - 1) == getAktivenSpieler().id &&
-                    sindVierInEinerReihe(x + 1, y - 1)) {
+                    spielfeld[x + 2].get(y - 2) == getAktivenSpieler().id &&
+                    spielfeld[x + 3].get(y - 3) == getAktivenSpieler().id) {
                 return true;
             }
             // unten
-            if (spielfeld.length > x &&
-                    y - 1 >= 0 &&
-                    VierGewinnt.spielfeld[x].size() > y - 1 &&
-                    spielfeld[x].get(y-1) == getAktivenSpieler().id &&
-                    sindVierInEinerReihe(x, y - 1)) {
+            if (y - 3 >= 0 &&
+                    y <= 6 &&
+                    spielfeld[x].get(y - 1) == getAktivenSpieler().id &&
+                    spielfeld[x].get(y - 2) == getAktivenSpieler().id &&
+                    spielfeld[x].get(y - 3) == getAktivenSpieler().id) {
                 return true;
             }
             // linksunten
-            if (x - 1 >= 0 &&
-                    y - 1 >= 0 &&
+            if (x - 3 >= 0 &&
+                    y - 3 >= 0 &&
+                    y + 3 <= 6 &&
                     VierGewinnt.spielfeld[x - 1].size() > y - 1 &&
-                    spielfeld[x - 1].get(y-1) == getAktivenSpieler().id &&
-                    sindVierInEinerReihe(x - 1, y - 1)) {
+                    VierGewinnt.spielfeld[x - 2].size() > y - 2 &&
+                    VierGewinnt.spielfeld[x - 3].size() > y - 3 &&
+                    spielfeld[x - 1].get(y - 1) == getAktivenSpieler().id &&
+                    spielfeld[x - 2].get(y - 2) == getAktivenSpieler().id &&
+                    spielfeld[x - 3].get(y - 3) == getAktivenSpieler().id) {
                 return true;
             }
             // links
-            if (x - 1 >= 0 &&
-                    y  >= 0 &&
+            if (x - 3 >= 0 &&
+                    y >= 0 &&
                     VierGewinnt.spielfeld[x - 1].size() > y &&
+                    VierGewinnt.spielfeld[x - 2].size() > y &&
+                    VierGewinnt.spielfeld[x - 3].size() > y &&
                     spielfeld[x - 1].get(y) == getAktivenSpieler().id &&
-                    sindVierInEinerReihe(x - 1, y)) {
+                    spielfeld[x - 2].get(y) == getAktivenSpieler().id &&
+                    spielfeld[x - 3].get(y) == getAktivenSpieler().id) {
                 return true;
             }
             // rechts
@@ -184,6 +196,7 @@ public class VierGewinnt {
                     spielfeld[x].get(y + 3) == getAktivenSpieler().id) {
                 return true;
             }
+
             // linksoben
             if (x - 3 >= 0 &&
                     y >= 0 &&
