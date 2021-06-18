@@ -106,7 +106,6 @@ public class VierGewinnt {
 		if (reihe > spielfeld.length) throw new Exception("Das Spielfeld ist nur 7 breit");
 		if (spielfeld[reihe].size() >= 6) throw new Exception("Diese Reihe ist bereits voll");
 		spielfeld[reihe].add(spieler.id);
-		System.out.println("Hinzugefügt: " + spielfeld[reihe].size());
 	}
 
 
@@ -120,96 +119,113 @@ public class VierGewinnt {
 	}
 
 	private static boolean sindVierInEinerReihe(int x, int y) {
-		try {
+		// try {
 			
-			// rechtsunten
-			if (spielfeld.length > x + 3 &&
-					y >= 0 &&
-					y + 3 <= 6 &&
-					VierGewinnt.spielfeld[x + 1].size() > y - 1 &&
-					VierGewinnt.spielfeld[x + 2].size() > y - 2 &&
-					VierGewinnt.spielfeld[x + 3].size() > y - 3 &&
-					spielfeld[x + 1].get(y - 1) == getAktivenSpieler().id &&
-					spielfeld[x + 2].get(y - 2) == getAktivenSpieler().id &&
-					spielfeld[x + 3].get(y - 3) == getAktivenSpieler().id) {
-				return true;
-			}
-			// unten
-			if (y - 3 >= 0 &&
-					y <= 6 &&
-					spielfeld[x].get(y - 1) == getAktivenSpieler().id &&
-					spielfeld[x].get(y - 2) == getAktivenSpieler().id &&
-					spielfeld[x].get(y - 3) == getAktivenSpieler().id) {
-				return true;
-			}
-			// linksunten
-			if (x - 3 >= 0 &&
-					y - 3 >= 0 &&
-					y <= 6 &&
-					VierGewinnt.spielfeld[x - 1].size() > y - 1 &&
-					VierGewinnt.spielfeld[x - 2].size() > y - 2 &&
-					VierGewinnt.spielfeld[x - 3].size() > y - 3 &&
-					spielfeld[x - 1].get(y - 1) == getAktivenSpieler().id &&
-					spielfeld[x - 2].get(y - 2) == getAktivenSpieler().id &&
-					spielfeld[x - 3].get(y - 3) == getAktivenSpieler().id) {
-				return true;
-			}
-			// links
-			if (x - 3 >= 0 &&
-					y >= 0 &&
-					VierGewinnt.spielfeld[x - 1].size() > y &&
-					VierGewinnt.spielfeld[x - 2].size() > y &&
-					VierGewinnt.spielfeld[x - 3].size() > y &&
-					spielfeld[x - 1].get(y) == getAktivenSpieler().id &&
-					spielfeld[x - 2].get(y) == getAktivenSpieler().id &&
-					spielfeld[x - 3].get(y) == getAktivenSpieler().id) {
-				return true;
-			}
-			// rechts
-			if (spielfeld.length > x + 3 &&
-					y >= 0 &&
-					VierGewinnt.spielfeld[x + 1].size() > y &&
-					VierGewinnt.spielfeld[x + 2].size() > y &&
-					VierGewinnt.spielfeld[x + 3].size() > y &&
-					spielfeld[x + 1].get(y) == getAktivenSpieler().id &&
-					spielfeld[x + 2].get(y) == getAktivenSpieler().id &&
-					spielfeld[x + 3].get(y) == getAktivenSpieler().id) {
-				return true;
-			}
-			// rechtsoben
-			if (spielfeld.length > x + 3 &&
-					y >= 0 &&
-					y + 3 <= 6 &&
-					VierGewinnt.spielfeld[x + 1].size() > y + 1 &&
-					VierGewinnt.spielfeld[x + 2].size() > y + 2 &&
-					VierGewinnt.spielfeld[x + 3].size() > y + 3 &&
-					spielfeld[x + 1].get(y + 1) == getAktivenSpieler().id &&
-					spielfeld[x + 2].get(y + 2) == getAktivenSpieler().id &&
-					spielfeld[x + 3].get(y + 3) == getAktivenSpieler().id) {
-				return true;
-			}
-			// oben
-			if (y >= 0 &&
-					y + 3 <= 6 &&
-					spielfeld[x].get(y + 1) == getAktivenSpieler().id &&
-					spielfeld[x].get(y + 2) == getAktivenSpieler().id &&
-					spielfeld[x].get(y + 3) == getAktivenSpieler().id) {
-				return true;
-			}
+		// 	rechtsunten
+		// 	if (spielfeld.l ength > x + 3 &&
+		// 			y >= 0 &&
+		// 			y + 3 <= 6 &&
+		// 			VierGewinnt.spielfeld[x + 1].size() > y - 1 &&
+		// 			VierGewinnt.spielfeld[x + 2].size() > y - 2 &&
+		// 			VierGewinnt.spielfeld[x + 3].size() > y - 3 &&
+		// 			spielfeld[x + 1].get(y - 1) == getAktivenSpieler().id &&
+		// 			spielfeld[x + 2].get(y - 2) == getAktivenSpieler().id &&
+		// 			spielfeld[x + 3].get(y - 3) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
+		// 	unten
+		// 	if (y - 3 >= 0 &&
+		// 			y <= 6 &&
+		// 			spielfeld[x].get(y - 1) == getAktivenSpieler().id &&
+		// 			spielfeld[x].get(y - 2) == getAktivenSpieler().id &&
+		// 			spielfeld[x].get(y - 3) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
+		// 	linksunten
+		// 	if (x - 3 >= 0 &&
+		// 			y - 3 >= 0 &&
+		// 			y <= 6 &&
+		// 			VierGewinnt.spielfeld[x - 1].size() > y - 1 &&
+		// 			VierGewinnt.spielfeld[x - 2].size() > y - 2 &&
+		// 			VierGewinnt.spielfeld[x - 3].size() > y - 3 &&
+		// 			spielfeld[x - 1].get(y - 1) == getAktivenSpieler().id &&
+		// 			spielfeld[x - 2].get(y - 2) == getAktivenSpieler().id &&
+		// 			spielfeld[x - 3].get(y - 3) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
+		// 	System.out.println("###################");
+		// 	System.out.println("X: ");
+		// 	System.out.println(spielfeld.length > x + 3);
+		// 	System.out.println(spielfeld.length);
+		// 	System.out.println(x);
+		// 	System.out.println("###################");
+		// 	System.out.println(y >= 0);
+		// 	System.out.println(VierGewinnt.spielfeld[x + 1].size());
+		// 	System.out.println(VierGewinnt.spielfeld[x + 2].size());
+		// 	System.out.println(VierGewinnt.spielfeld[x + 3].size());
+		// 	System.out.println("###################");
+		// 	System.out.println(spielfeld[x + 1].get(y));
+		// 	System.out.println(spielfeld[x + 2].get(y));
+		// 	System.out.println(spielfeld[x + 3].get(y));
+		// 	System.out.println("###################");
+		// 	links
+		// 	if (x - 3 >= 0 &&
+		// 			y >= 0 &&
+		// 			VierGewinnt.spielfeld[x - 1].size() > y &&
+		// 			VierGewinnt.spielfeld[x - 2].size() > y &&
+		// 			VierGewinnt.spielfeld[x - 3].size() > y &&
+		// 			spielfeld[x - 1].get(y) == getAktivenSpieler().id &&
+		// 			spielfeld[x - 2].get(y) == getAktivenSpieler().id &&
+		// 			spielfeld[x - 3].get(y) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
+		// 	rechts
+		// 	if (spielfeld.length >= x + 3 &&
+		// 			y >= 0 &&
+		// 			VierGewinnt.spielfeld[x + 1].size() > y &&
+		// 			VierGewinnt.spielfeld[x + 2].size() > y &&
+		// 			VierGewinnt.spielfeld[x + 3].size() > y &&
+		// 			spielfeld[x + 1].get(y) == getAktivenSpieler().id &&
+		// 			spielfeld[x + 2].get(y) == getAktivenSpieler().id &&
+		// 			spielfeld[x + 3].get(y) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
+		// 	rechtsoben
+		// 	if (spielfeld.length > x + 3 &&
+		// 			y >= 0 &&
+		// 			y + 3 <= 6 &&
+		// 			VierGewinnt.spielfeld[x + 1].size() > y + 1 &&
+		// 			VierGewinnt.spielfeld[x + 2].size() > y + 2 &&
+		// 			VierGewinnt.spielfeld[x + 3].size() > y + 3 &&
+		// 			spielfeld[x + 1].get(y + 1) == getAktivenSpieler().id &&
+		// 			spielfeld[x + 2].get(y + 2) == getAktivenSpieler().id &&
+		// 			spielfeld[x + 3].get(y + 3) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
+		// 	oben
+		// 	if (y >= 0 &&
+		// 			y + 3 <= 6 &&
+		// 			spielfeld[x].get(y + 1) == getAktivenSpieler().id &&
+		// 			spielfeld[x].get(y + 2) == getAktivenSpieler().id &&
+		// 			spielfeld[x].get(y + 3) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
 
-			// linksoben
-			if (x - 3 >= 0 &&
-					y >= 0 &&
-					y + 3 <= 6 &&
-					VierGewinnt.spielfeld[x - 1].size() > y + 1 &&
-					VierGewinnt.spielfeld[x - 2].size() > y + 2 &&
-					VierGewinnt.spielfeld[x - 3].size() > y + 3 &&
-					spielfeld[x - 1].get(y + 1) == getAktivenSpieler().id &&
-					spielfeld[x - 2].get(y + 2) == getAktivenSpieler().id &&
-					spielfeld[x - 3].get(y + 3) == getAktivenSpieler().id) {
-				return true;
-			}
-		} catch (Exception e) {}
+		// 	linksoben
+		// 	if (x - 3 >= 0 &&
+		// 			y >= 0 &&
+		// 			y + 3 <= 6 &&
+		// 			VierGewinnt.spielfeld[x - 1].size() > y + 1 &&
+		// 			VierGewinnt.spielfeld[x - 2].size() > y + 2 &&
+		// 			VierGewinnt.spielfeld[x - 3].size() > y + 3 &&
+		// 			spielfeld[x - 1].get(y + 1) == getAktivenSpieler().id &&
+		// 			spielfeld[x - 2].get(y + 2) == getAktivenSpieler().id &&
+		// 			spielfeld[x - 3].get(y + 3) == getAktivenSpieler().id) {
+		// 		return true;
+		// 	}
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
 
 
 		return false;

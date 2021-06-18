@@ -48,8 +48,9 @@ public class Singleplayer {
             }
             else
             {
-                App.setRoot("spiel");
+                
                 try {
+                    App.setRoot("spiel");
                     Auswahl();
                 } catch (Exception e) {
                     e.printStackTrace();

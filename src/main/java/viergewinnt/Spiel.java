@@ -117,6 +117,10 @@ public class Spiel implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		pause();
+
+		if (!VierGewinnt.muliplayerModus)
+			return;
 		WebSocketClient.client.addMessageHandler(new WebSocketClient.NachrichtenBearbeitung() {
 
 			@Override
@@ -199,8 +203,9 @@ public class Spiel implements Initializable {
 	 * verbleibendeZeit = Zeit, die den beiden Spielern noch verbleibt, um das Spiel
 	 * zu beenden PauseZahl = Erklärung folgt bei der Methode pause()
 	 */
-	int verbleibendeZeit = 20;
-	int PauseZahl = 0;
+	private int zeit = 20;
+	private int verbleibendeZeit = 20;
+	private int PauseZahl = 0;
 
 	public void rueckwaertsProgressBar() {
 		Timer timer = new Timer();
@@ -209,14 +214,16 @@ public class Spiel implements Initializable {
 			public void run() {
 				if (verbleibendeZeit > 0) {
 					if (PauseZahl == 1) {
-						verbleibendeZeit = verbleibendeZeit - 1;
-						// spielfeld_progressbar.setValue(verbleibendeZeit);
-						System.out.println(verbleibendeZeit);
+						verbleibendeZeit -= 1;
+
+						double zeitFürProgessbar = (double) verbleibendeZeit / (double) zeit;
+						spielfeld_progressbar.setProgress(zeitFürProgessbar);
 					}
 				} else {
+					// pause();
+					verbleibendeZeit = zeit;
 					timer.cancel();
-					System.out.println("Die Zeit ist abgelaufen.");
-					ZeitAlert();
+					Platform.runLater(() -> ZeitAlert());
 				}
 			}
 		};
@@ -281,6 +288,8 @@ public class Spiel implements Initializable {
 		String[] ids = id.split("_");
 
 		try {
+			System.out.println(ids);
+
 			// Stein wird in der Spalte gesetz, in der der Spieler einen Button geklickt hat
 			VierGewinnt.reiheSetzen(Integer.parseInt(ids[2]), VierGewinnt.getAktivenSpieler());
 
@@ -320,6 +329,7 @@ public class Spiel implements Initializable {
 
 		// Wenn keiner gewonnen hat wird der aktive Spieler geändert / gewchselt und die
 		// nächste Runde beginnt.
+		verbleibendeZeit = zeit;
 		VierGewinnt.spielerWechseln();
 	}
 

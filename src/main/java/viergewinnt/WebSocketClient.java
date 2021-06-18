@@ -28,7 +28,6 @@ public class WebSocketClient {
      */
     @OnOpen
     public void onOpen(Session s) {
-        System.out.println("Verbunden");
         this.s = s;
     }
 
@@ -38,7 +37,6 @@ public class WebSocketClient {
      */
     @OnClose
     public void onClose(Session userSession, CloseReason reason) {
-        System.out.println("Verbindung geschlossen");
         this.s = null;
     }
 
