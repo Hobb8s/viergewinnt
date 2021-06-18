@@ -11,29 +11,35 @@
 }
 
 .rot{
-    -fx-background-color: #FA5858;
+    -fx-background-color: #E53935;
     -fx-text-fill: #000000;
     -fx-opacity: 0.9;
 }
 
 .gelb{
-    -fx-background-color: #F7FE2E;
+    -fx-background-color: #FDD835;
     -fx-text-fill: #000000;
     -fx-opacity: 0.8;
 }
 
 .gruen{
-    -fx-background-color: #64FE2E;
+    -fx-background-color: #43A047;
     -fx-text-fill: #000000;
     -fx-opacity: 0.8;
 }
 
 .blau{
-    -fx-background-color: #5882FA;
+    -fx-background-color: #1E88E5;
     -fx-text-fill: #000000;
     -fx-opacity: 0.8;
 }
 
 .transparent{
     -fx-opacity: 0.8;
+}
+
+.aus{
+    -fx-background-color: #212121;
+    -fx-text-fill: #EEEEEE;
+    -fx-opacity: 0.5;
 }
