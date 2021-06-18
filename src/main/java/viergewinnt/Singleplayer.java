@@ -19,10 +19,8 @@ public class Singleplayer implements Initializable{
     public ChoiceBox<String> single_farbwahl1;
     public ChoiceBox<String> single_farbwahl2;
 
-    /**
-     * Weiterleitung zur spiel.fxml, sofern zwei unterschiedliche Namen und zwei unterschiedliche Farben ausgewählt wurden, andernfalls folgt eine Fehlermeldung
-     */
-    public void singleweiter() throws IOException {
+    // Weiterleitung zur spiel.fxml, sofern zwei unterschiedliche Namen und zwei unterschiedliche Farben ausgewählt wurden, andernfalls folgt eine Fehlermeldung
+    public void singleweiter()  {
         if (single_namenswahl1.getText() == null || single_namenswahl2.getText() == null || single_namenswahl1.getText().equals(single_namenswahl2.getText())) {
             Alert keinName = new Alert(Alert.AlertType.INFORMATION);
             keinName.setTitle("Fehler");
@@ -32,8 +30,9 @@ public class Singleplayer implements Initializable{
                     System.out.println("OK gedrückt.");
                 }
             });
-        } else {
-            if (single_farbwahl1.getValue().equals(single_farbwahl2.getValue())) {
+        }
+        else {
+            if (single_farbwahl1.getValue() == single_farbwahl2.getValue()) {
                 Alert gleicheFarbe = new Alert(Alert.AlertType.INFORMATION);
                 gleicheFarbe.setTitle("Fehler");
                 gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
@@ -42,41 +41,45 @@ public class Singleplayer implements Initializable{
                         System.out.println("OK gedrückt.");
                     }
                 });
-            } else {
+            }
+            else
+            {
+                if (single_farbwahl1.getValue() == null || single_farbwahl2.getValue() == null) {
+                    Alert gleicheFarbe = new Alert(Alert.AlertType.ERROR);
+                    gleicheFarbe.setTitle("Fehler");
+                    gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
+                    gleicheFarbe.showAndWait().ifPresent(rs -> {
+                        if (rs == ButtonType.OK) {
+                            System.out.println("OK gedrückt.");
+                        }
+                    });
+                }
+                else
+                {
 
-                try {
-                    App.setRoot("spiel");
-                    FarbWahlSpieler1();
-                    FarbWahlSpieler2();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    try {
+                        App.setRoot("spiel");
+                        FarbWahlSpieler1();
+                        FarbWahlSpieler2();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
         }
     }
 
-    /**
-     * Weiterleitung zur startBildschirm.fxml
-     */
+
+    // Weiterleitung zur startBildschirm.fxml
     public void singlezurück() throws IOException {
         App.setRoot("startBildschirm");
     }
 
-    /**
-     * Hinzufügen der zwei Spieler mit den ausgewählten Namen und Farben
-
-     public void Auswahl() throws Exception
-     {
-     VierGewinnt.zuruecksetzen();
-     VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), single_farbwahl1.getValue());
-     VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), single_farbwahl2.getValue());
-
-     }  */
-
-
+    // Erstellen eines Array mit den verschiedenen möglichen Farben
     private String[] farben = {"Rot", "Orange", "Gelb", "Grün", "Blau", "Schwarz"};
 
+    // Einfügen des Array in die beiden Choice-Boxen
     @Override
     public void initialize(URL arg0, ResourceBundle arg1)
     {
@@ -84,6 +87,7 @@ public class Singleplayer implements Initializable{
         single_farbwahl2.getItems().addAll(farben);
     }
 
+    // Erstellen des ersten Spielers mit dem angegebenen Namen und der ausgewählten Farbe
     public void FarbWahlSpieler1()
     {
         try {
@@ -142,6 +146,7 @@ public class Singleplayer implements Initializable{
 
     }
 
+    // Erstellen des zweiten Spielers mit dem angegebenen Namen und der ausgewählten Farbe
     public void FarbWahlSpieler2()
     {
         try {
@@ -191,18 +196,7 @@ public class Singleplayer implements Initializable{
         {
             e.printStackTrace();
         };
-
     }
-
-
-
-
-
-
-
-
-
-
 }
 
 

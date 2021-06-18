@@ -250,7 +250,6 @@ public class Spiel implements Initializable {
 	// Pausezahl: Zahl, die den aktuellen Stand ausgibt:
 	//            0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start bei 0 und Weiter bei 2)
 	//            1 = Zeit läuft
-
 	public void pause() {
 		if (PauseZahl == 0) {
 			rueckwaertsProgressBar();
@@ -293,6 +292,10 @@ public class Spiel implements Initializable {
 
 			// Stein wird in der Spalte gesetz, in der der Spieler einen Button geklickt hat
 			VierGewinnt.reiheSetzen(Integer.parseInt(ids[2]), VierGewinnt.getAktivenSpieler());
+
+			//Die Zeit beginnt weiter zu laufen und der Text des Buttons ändert sich in Paus
+			PauseZahl = 1;
+			spielfeld_pause.setText("Pause");
 
 			Button b = (Button) getClass().getDeclaredField(
 					"spielfeld_" + ((VierGewinnt.hoeheVonReihe(Integer.parseInt(ids[2])) - 6) * -1) + "_" + ids[2])
