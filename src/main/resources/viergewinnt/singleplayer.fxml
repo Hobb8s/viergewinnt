@@ -11,12 +11,12 @@
             <Image url="@../Bilder/hintergrund.jpg" />
         </image>
     </ImageView>
+   <TextField fx:id="single_namenswahl1" layoutX="202.0" layoutY="190.0" promptText="Name" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
+   <ColorPicker fx:id="single_farbwahl1" layoutX="648.0" layoutY="190.0" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
+   <TextField fx:id="single_namenswahl2" layoutX="202.0" layoutY="390.0" promptText="Name" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
+   <ColorPicker fx:id="single_farbwahl2" layoutX="648.0" layoutY="390.0" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
+    <Button fx:id="single_weiter" layoutX="658.0" layoutY="578.0" mnemonicParsing="false" onAction="#singleweiter" scaleX="1.8" scaleY="1.8" styleClass="gruen" text="Starten" />
 
     <Button fx:id="single_zurück" layoutX="250.0" layoutY="578.0" mnemonicParsing="false" onAction="#singlezurück" scaleX="1.8" scaleY="1.8" styleClass="rot" text="Zurück" />
-    <Button fx:id="single_weiter" layoutX="658.0" layoutY="578.0" mnemonicParsing="false" onAction="#singleweiter" scaleX="1.8" scaleY="1.8" styleClass="gruen" text="Starten" />
-   <ColorPicker fx:id="single_farbwahl2" layoutX="648.0" layoutY="390.0" scaleX="1.8" scaleY="1.8" />
-   <ColorPicker fx:id="single_farbwahl1" layoutX="648.0" layoutY="190.0" scaleX="1.8" scaleY="1.8" />
-   <TextField fx:id="single_namenswahl2" layoutX="202.0" layoutY="390.0" promptText="Name" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
-   <TextField fx:id="single_namenswahl1" layoutX="202.0" layoutY="190.0" promptText="Name" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
 
 </AnchorPane>

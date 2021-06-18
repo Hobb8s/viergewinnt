@@ -11,13 +11,13 @@
         </image>
     </ImageView>
     <Button fx:id="multi_zurueck" layoutX="89.0" layoutY="578.0" mnemonicParsing="false" onAction="#zurueck" scaleX="1.8" scaleY="1.8" styleClass="rot" text="Zurück" />
-    <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" onAction="#start" scaleX="1.8" scaleY="1.8" styleClass="transparent" text="Starten" />
+    <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" onAction="#start" scaleX="1.8" scaleY="1.8" styleClass="aus" text="Starten" />
    <Button fx:id="multi_verbinden" layoutX="502.0" layoutY="578.0" mnemonicParsing="false" onAction="#verbinden" scaleX="1.8" scaleY="1.8" styleClass="gruen" text="Verbinden" />
    <Button fx:id="multi_server_herunterladen" layoutX="727.0" layoutY="578.0" mnemonicParsing="false" onAction="#herunterladen" scaleX="1.8" scaleY="1.8" styleClass="blau" text="Server herunterladen" />
    <TextField fx:id="multi_namenswahl" layoutX="168.0" layoutY="130.0" promptText="Name" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TextField fx:id="multi_internetadresse" layoutX="168.0" layoutY="245.0" promptText="127.0.0.1:3000" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TextField fx:id="multi_raum_ID" layoutX="630.0" layoutY="245.0" promptText="Raum ID" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
-   <ColorPicker fx:id="multi_farbwahl" layoutX="624.0" layoutY="130.0" scaleX="1.8" scaleY="1.8" />
+   <ColorPicker fx:id="multi_farbwahl" layoutX="624.0" layoutY="130.0" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TableView fx:id="multi_tableview" layoutX="108.0" layoutY="345.0" prefHeight="94.0" prefWidth="731.0" styleClass="transparent" />
 
 

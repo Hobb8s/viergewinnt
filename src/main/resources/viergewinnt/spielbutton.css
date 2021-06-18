@@ -39,7 +39,7 @@
 }
 
 .aus{
-    -fx-background-color: #212121;
-    -fx-text-fill: #EEEEEE;
+    -fx-background-color: #EEEEEE;
+    -fx-text-fill: #757575;
     -fx-opacity: 0.5;
 }
