@@ -179,10 +179,8 @@ public class Spiel implements Initializable {
 		});
 	}
 
-	/**
-	 * Bestätigen des Abbrechens des Spiels und Zurückgelangen zur
-	 * startBildschirm.fxml
-	 */
+	// Bestätigen des Abbrechens des Spiels und Zurückgelangen zur startBildschirm.fxml und währenddessen Anhalten des Timers,
+	// der bei Verlassen des Spiels den Text des Pause-Buttons für das nächste Spiel auf Start setzt.
 	public void verlassen() throws IOException {
 		PauseZahl = 2;
 		Alert bestätigung = new Alert(Alert.AlertType.CONFIRMATION);
@@ -199,28 +197,29 @@ public class Spiel implements Initializable {
 		}
 	}
 
-	/**
-	 * verbleibendeZeit = Zeit, die den beiden Spielern noch verbleibt, um das Spiel
-	 * zu beenden PauseZahl = Erklärung folgt bei der Methode pause()
-	 */
+	// verbleibendeZeit = Zeit, die dem aktiven Spieler verbleibt, um den Spielzug durchzuführen
+	// PauseZahl = Erklärung folgt bei der Methode pause() ;)
+	// zeit = Zeit, die ein Spieler zum Ausführen eines Zuges besitzt
+	// Timer = Timer, der die aktuelle, noch zum Ausführen des Zuges übrige, Zeit bestimmt
 	private int zeit = 20;
 	private int verbleibendeZeit = 20;
 	private int PauseZahl = 0;
+	private Timer timer = new Timer();
 
+	// Erstellt eine ProgressBar, die die noch verbleibende Zeit visuell zeigt und sich jede Sekunde aktualisiert
 	public void rueckwaertsProgressBar() {
-		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				if (verbleibendeZeit > 0) {
-					if (PauseZahl == 1) {
-						verbleibendeZeit -= 1;
+					if (PauseZahl == 1)
+					{
+							verbleibendeZeit -= 1;
+							double zeitFürProgessbar = (double) verbleibendeZeit / (double) zeit;
+							spielfeld_progressbar.setProgress(zeitFürProgessbar);
 
-						double zeitFürProgessbar = (double) verbleibendeZeit / (double) zeit;
-						spielfeld_progressbar.setProgress(zeitFürProgessbar);
 					}
 				} else {
-					// pause();
 					verbleibendeZeit = zeit;
 					timer.cancel();
 					Platform.runLater(() -> ZeitAlert());
@@ -228,11 +227,11 @@ public class Spiel implements Initializable {
 			}
 		};
 		timer.scheduleAtFixedRate(task, 1000, 1000);
-
 	}
 
+	// Informationsfenster für die abgelaufene Zeit
 	public void ZeitAlert() {
-		Alert zeitVorbei = new Alert(AlertType.CONFIRMATION);
+		Alert zeitVorbei = new Alert(AlertType.INFORMATION);
 		zeitVorbei.setTitle("Ablauf der Zeit");
 		zeitVorbei.setContentText("Leider waren Sie zu langsam und die Zeit ist abgelaufen.");
 		zeitVorbei.showAndWait().ifPresent(rs -> {
@@ -243,13 +242,15 @@ public class Spiel implements Initializable {
 					e.printStackTrace();
 				}
 			}
+
 		});
 	}
 
-	/**
-	 * Pausezahl: 0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start
-	 * oder Weiter) 1 = Zeit läuft
-	 */
+
+	// Pausezahl: Zahl, die den aktuellen Stand ausgibt:
+	//            0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start bei 0 und Weiter bei 2)
+	//            1 = Zeit läuft
+
 	public void pause() {
 		if (PauseZahl == 0) {
 			rueckwaertsProgressBar();
@@ -312,8 +313,15 @@ public class Spiel implements Initializable {
 
 		if (istGewonnen != null) {
 
+			// Der Timer wird gestoppt, der Text des Pause-Button für das nächste Spiel auf Start gesetzt und die
+			// verbleibende Zeit für das Ausführen des Spiellzugs (im nächsten Spiel) wird zurückgesetzt.
+			timer.cancel();
+			PauseZahl = 0;
+			verbleibendeZeit = zeit;
+
 			// Es wird angezeigt wer gewonnen hat
 			zeigeAlert(Alert.AlertType.INFORMATION, "Gewonnen", "Spieler " + istGewonnen.name + " hat gewonnen.");
+
 
 			try {
 				App.setRoot("StartBildschirm");
@@ -324,6 +332,7 @@ public class Spiel implements Initializable {
 			}
 
 			// Da jemand das Spiel gewonnen hat, wird das laufende Spiel abgebrochen
+
 			return;
 		}
 
