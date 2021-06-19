@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@spielbutton.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.Multiplayer">
     <ImageView fitHeight="766.0" fitWidth="1012.0" pickOnBounds="true" preserveRatio="true">
@@ -11,9 +12,15 @@
         </image>
     </ImageView>
     <Button fx:id="multi_zurueck" layoutX="89.0" layoutY="578.0" mnemonicParsing="false" onAction="#zurueck" scaleX="1.8" scaleY="1.8" styleClass="rot" text="Zurück" />
-    <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" onAction="#start" scaleX="1.8" scaleY="1.8" styleClass="aus" text="Starten" />
-   <Button fx:id="multi_verbinden" layoutX="502.0" layoutY="578.0" mnemonicParsing="false" onAction="#verbinden" scaleX="1.8" scaleY="1.8" styleClass="gruen" text="Verbinden" />
-   <Button fx:id="multi_server_herunterladen" layoutX="727.0" layoutY="578.0" mnemonicParsing="false" onAction="#herunterladen" scaleX="1.8" scaleY="1.8" styleClass="blau" text="Server herunterladen" />
+    <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" onAction="#start" scaleX="1.8" scaleY="1.8" styleClass="aus" text="Starten">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
+   <Button fx:id="multi_verbinden" layoutX="502.0" layoutY="578.0" mnemonicParsing="false" onAction="#verbinden" scaleX="1.8" scaleY="1.8" styleClass="rot" text="Verbinden">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
+   <Button fx:id="multi_server_herunterladen" layoutX="727.0" layoutY="578.0" mnemonicParsing="false" onAction="#herunterladen" scaleX="1.8" scaleY="1.8" styleClass="rot" text="Server herunterladen" />
    <TextField fx:id="multi_namenswahl" layoutX="168.0" layoutY="130.0" promptText="Name" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TextField fx:id="multi_internetadresse" layoutX="168.0" layoutY="245.0" promptText="127.0.0.1:3000" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TextField fx:id="multi_raum_ID" layoutX="630.0" layoutY="245.0" promptText="Raum ID" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
