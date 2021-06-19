@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -21,7 +22,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("startBildschirm"), 1000, 750);
-        // stage.getIcons().add(new Image(""));
+        stage.getIcons().add(new Image(App.class.getResource("VierGewinntIcon.jpg").toExternalForm()));
         stage.setTitle("4-Gewinnt");
         stage.setScene(scene);
         stage.show();
@@ -45,5 +46,4 @@ public class App extends Application {
     public void oeffneWebAdresse (String addr) {
         getHostServices().showDocument(addr);
     }
-
 }

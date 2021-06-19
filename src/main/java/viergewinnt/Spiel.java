@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.json.Json;
+import javax.json.JsonObject;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -121,6 +122,10 @@ public class Spiel implements Initializable {
 
 		if (!VierGewinnt.muliplayerModus)
 			return;
+
+		// ---------------------------------------------------------------------------------
+		// Neue NachrichtenBearbeitung wird für das Spiel erstellet mit anderen Events
+		// ---------------------------------------------------------------------------------
 		WebSocketClient.client.addMessageHandler(new WebSocketClient.NachrichtenBearbeitung() {
 
 			@Override
@@ -175,12 +180,57 @@ public class Spiel implements Initializable {
 
 				}
 
+				// ---------------------------------------------------------------------------------
+				// wenn ein Spieler ein Raum verlassen hat
+				// ---------------------------------------------------------------------------------
+
+				if (aktion.equals("Spieler wechseln")) {
+					try {
+						// ---------------------------------------------------------------------------------
+						// Liest das Json Schema: { grund: string, pos?: { x: number, y: number } }
+						// ---------------------------------------------------------------------------------
+						JsonObject jo = Json.createReader(new StringReader(daten)).readObject();
+
+						// ---------------------------------------------------------------------------------
+						// Wenn beim Gegener die Zeit abgelaufen ist, dann wird der Spieler gewechselt.
+						// ---------------------------------------------------------------------------------
+
+						if (jo.get("grund").toString().equals("Zeit abgelaufen")) {
+							spielerWechseln();
+							return;
+						}
+
+						// ---------------------------------------------------------------------------------
+						// Zug des Gegeners wird auch hier vollzugen &
+						// Es wird überprüft, ob der Gegener gewonnen hat
+						// ---------------------------------------------------------------------------------
+
+						JsonObject pos = Json.createReader(new StringReader(jo.get("pos").toString())).readObject();
+
+						int x = Integer.parseInt(pos.get("x").toString());
+						int y = Integer.parseInt(pos.get("y").toString());
+
+						Platform.runLater(() -> {
+							steinSetzen(x, y);
+							
+							if (!überprüfeHatGewonnen(x, y))
+								spielerWechseln();
+						});
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+
 			}
 		});
 	}
 
-	// Bestätigen des Abbrechens des Spiels und Zurückgelangen zur startBildschirm.fxml und währenddessen Anhalten des Timers,
-	// der bei Verlassen des Spiels den Text des Pause-Buttons für das nächste Spiel auf Start setzt.
+	// Bestätigen des Abbrechens des Spiels und Zurückgelangen zur
+	// startBildschirm.fxml und währenddessen Anhalten des Timers,
+	// der bei Verlassen des Spiels den Text des Pause-Buttons für das nächste Spiel
+	// auf Start setzt.
 	public void verlassen() throws IOException {
 		PauseZahl = 2;
 		Alert bestätigung = new Alert(Alert.AlertType.CONFIRMATION);
@@ -197,26 +247,28 @@ public class Spiel implements Initializable {
 		}
 	}
 
-	// verbleibendeZeit = Zeit, die dem aktiven Spieler verbleibt, um den Spielzug durchzuführen
+	// verbleibendeZeit = Zeit, die dem aktiven Spieler verbleibt, um den Spielzug
+	// durchzuführen
 	// PauseZahl = Erklärung folgt bei der Methode pause() ;)
 	// zeit = Zeit, die ein Spieler zum Ausführen eines Zuges besitzt
-	// Timer = Timer, der die aktuelle, noch zum Ausführen des Zuges übrige, Zeit bestimmt
+	// Timer = Timer, der die aktuelle, noch zum Ausführen des Zuges übrige, Zeit
+	// bestimmt
 	private int zeit = 20;
 	private int verbleibendeZeit = 20;
 	private int PauseZahl = 0;
 	private Timer timer = new Timer();
 
-	// Erstellt eine ProgressBar, die die noch verbleibende Zeit visuell zeigt und sich jede Sekunde aktualisiert
+	// Erstellt eine ProgressBar, die die noch verbleibende Zeit visuell zeigt und
+	// sich jede Sekunde aktualisiert
 	public void rueckwaertsProgressBar() {
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				if (verbleibendeZeit > 0) {
-					if (PauseZahl == 1)
-					{
-							verbleibendeZeit -= 1;
-							double zeitFürProgessbar = (double) verbleibendeZeit / (double) zeit;
-							spielfeld_progressbar.setProgress(zeitFürProgessbar);
+					if (PauseZahl == 1) {
+						verbleibendeZeit -= 1;
+						double zeitFürProgessbar = (double) verbleibendeZeit / (double) zeit;
+						spielfeld_progressbar.setProgress(zeitFürProgessbar);
 
 					}
 				} else {
@@ -246,10 +298,10 @@ public class Spiel implements Initializable {
 		});
 	}
 
-
 	// Pausezahl: Zahl, die den aktuellen Stand ausgibt:
-	//            0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start bei 0 und Weiter bei 2)
-	//            1 = Zeit läuft
+	// 0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start bei 0 und
+	// Weiter bei 2)
+	// 1 = Zeit läuft
 	public void pause() {
 		if (PauseZahl == 0) {
 			rueckwaertsProgressBar();
@@ -267,8 +319,9 @@ public class Spiel implements Initializable {
 	}
 
 	public void spielfeldClicked(ActionEvent event) {
+
 		// !---------------------------------------------------------------------------------
-		// Wenn der Multiplayer Modus aktiviert ist und der andere Spieler gerade eien
+		// Wenn der Multiplayer Modus aktiviert ist und der andere Spieler gerade einen
 		// Zug macht, wird die Methode abgebrochen.
 		// !---------------------------------------------------------------------------------
 		if (VierGewinnt.muliplayerModus && VierGewinnt.getAktivenSpieler().id != 0) {
@@ -284,63 +337,101 @@ public class Spiel implements Initializable {
 		// Speichere die Id von dem Button, der das Event getriggert hat
 		String id = ((Node) event.getSource()).getId();
 
-		// Zerlege die Id: "spielfeld_0_1" -> ["spielfeld", "0", "1"]
+		// Zerlege die Id um an X und Y Position des Buttons zu kommen: "spielfeld_0_1"
+		// -> ["spielfeld", "0", "1"] -> [, y, x]
 		String[] ids = id.split("_");
 
 		try {
-			System.out.println(ids);
-
 			// Stein wird in der Spalte gesetz, in der der Spieler einen Button geklickt hat
 			VierGewinnt.reiheSetzen(Integer.parseInt(ids[2]), VierGewinnt.getAktivenSpieler());
 
-			//Die Zeit beginnt weiter zu laufen und der Text des Buttons ändert sich in Paus
+			// Die Zeit beginnt weiter zu laufen und der Text des Buttons ändert sich in
+			// Paus
 			PauseZahl = 1;
 			spielfeld_pause.setText("Pause");
 
-			Button b = (Button) getClass().getDeclaredField(
-					"spielfeld_" + ((VierGewinnt.hoeheVonReihe(Integer.parseInt(ids[2])) - 6) * -1) + "_" + ids[2])
-					.get(this);
+			int x = Integer.parseInt(ids[2]);
+			int y = VierGewinnt.hoeheVonReihe(x) - 1;
+
+			Button b = (Button) getClass().getDeclaredField("spielfeld_" + (y - 5) * -1 + "_" + x).get(this);
 			b.setStyle("-fx-background-color: " + VierGewinnt.getAktivenSpieler().farbe + ";");
 
+			// ---------------------------------------------------------------------------------
+			// Dem Server wird mitgeteilt, dass ein Spieler einen Zug vollendet hat.
+			// Json Schema: { aktion: string, daten: { pos: { x: number, y: number },
+			// raumId: string } }
+			// ---------------------------------------------------------------------------------
+
+			if (VierGewinnt.muliplayerModus) {
+				WebSocketClient.client.sendMessage(Json.createObjectBuilder().add("aktion", "Runde abgeschlossen")
+						.add("daten",
+								Json.createObjectBuilder()
+										.add("pos", Json.createObjectBuilder().add("x", x).add("y", y))
+										.add("raumId", WebSocketClient.client.raumId))
+						.build().toString());
+			}
+
+			// ---------------------------------------------------------------------------------
+			// Es wird überprüft ob ein Spieler gewonnen hat
+			// ---------------------------------------------------------------------------------
+
+			if (überprüfeHatGewonnen(x, y))
+				return;
+
+			// Wenn keiner gewonnen hat wird der aktive Spieler geändert / gewchselt und die
+			// nächste Runde beginnt.
+			spielerWechseln();
+
 		} catch (Exception e) {
+			e.printStackTrace();
+			// Wenn ein Fehler auftritt, wird der Fehler mit einem Altert angezeigt
+			zeigeAlert(Alert.AlertType.ERROR, "Fehler", e.getMessage());
+		}
+
+	}
+
+	private boolean überprüfeHatGewonnen(int x, int y) {
+		Spieler hatGewonnen = VierGewinnt.hatGewonnen(x, y);
+
+		if (hatGewonnen == null)
+			return false;
+
+		// Der Timer wird gestoppt, der Text des Pause-Button für das nächste Spiel auf
+		// Start gesetzt und die
+		// verbleibende Zeit für das Ausführen des Spiellzugs (im nächsten Spiel) wird
+		// zurückgesetzt.
+		timer.cancel();
+		PauseZahl = 0;
+		verbleibendeZeit = zeit;
+
+		// Es wird angezeigt wer gewonnen hat
+		zeigeAlert(Alert.AlertType.INFORMATION, "Gewonnen", "Spieler " + hatGewonnen.name + " hat gewonnen.");
+
+		try {
+			App.setRoot("startBildschirm");
+		} catch (IOException e) {
 
 			// Wenn ein Fehler auftritt, wird der Fehler mit einem Altert angezeigt
 			zeigeAlert(Alert.AlertType.ERROR, "Fehler", e.getMessage());
 		}
 
-		// ---------------------------------------------------------------------------------
-		// Es wird überprüft ob ein Spieler gewonnen hat
-		// ---------------------------------------------------------------------------------
+		// Da jemand das Spiel gewonnen hat, wird das laufende Spiel abgebrochen
+		return true;
 
-		Spieler istGewonnen = VierGewinnt.istGewonnen(Integer.parseInt(ids[2]), (Integer.parseInt(ids[1]) - 5) * (-1));
+	}
 
-		if (istGewonnen != null) {
+	private void steinSetzen(int x, int y) {
+		try {
+			VierGewinnt.reiheSetzen(x, VierGewinnt.getAktivenSpieler());
 
-			// Der Timer wird gestoppt, der Text des Pause-Button für das nächste Spiel auf Start gesetzt und die
-			// verbleibende Zeit für das Ausführen des Spiellzugs (im nächsten Spiel) wird zurückgesetzt.
-			timer.cancel();
-			PauseZahl = 0;
-			verbleibendeZeit = zeit;
-
-			// Es wird angezeigt wer gewonnen hat
-			zeigeAlert(Alert.AlertType.INFORMATION, "Gewonnen", "Spieler " + istGewonnen.name + " hat gewonnen.");
-
-
-			try {
-				App.setRoot("StartBildschirm");
-			} catch (IOException e) {
-
-				// Wenn ein Fehler auftritt, wird der Fehler mit einem Altert angezeigt
-				zeigeAlert(Alert.AlertType.ERROR, "Fehler", e.getMessage());
-			}
-
-			// Da jemand das Spiel gewonnen hat, wird das laufende Spiel abgebrochen
-
-			return;
+			Button b = (Button) getClass().getDeclaredField("spielfeld_" + ((y - 5) * -1) + "_" + x).get(this);
+			b.setStyle("-fx-background-color: " + VierGewinnt.getAktivenSpieler().farbe + ";");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
 
-		// Wenn keiner gewonnen hat wird der aktive Spieler geändert / gewchselt und die
-		// nächste Runde beginnt.
+	private void spielerWechseln() {
 		verbleibendeZeit = zeit;
 		VierGewinnt.spielerWechseln();
 	}

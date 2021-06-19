@@ -135,8 +135,10 @@ public class Multiplayer implements Initializable {
 							if (!VierGewinnt.getSpieler().get(0).getUuid().equals(spieler1.getUuid()))
 								VierGewinnt.spielerHinzufuegen(spieler1);
 							if (spieler2 != null
-									&& !VierGewinnt.getSpieler().get(0).getUuid().equals(spieler2.getUuid()))
+									&& !VierGewinnt.getSpieler().get(0).getUuid().equals(spieler2.getUuid())) {
 								VierGewinnt.spielerHinzufuegen(spieler2);
+								VierGewinnt.spielerWechseln();
+							}
 
 							multi_tableview.setItems(VierGewinnt.getSpieler());
 						} catch (Exception e) {
@@ -178,6 +180,7 @@ public class Multiplayer implements Initializable {
 					if (aktion.equals("Bereit")) {
 						Platform.runLater(() -> {
 							try {
+								VierGewinnt.muliplayerModus = true;
 								App.setRoot("spiel");
 							} catch (IOException e) {
 								zeigeAlert(AlertType.ERROR, "Fehler", e.getMessage());
