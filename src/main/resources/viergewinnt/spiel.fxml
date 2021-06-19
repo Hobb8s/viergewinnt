@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@spielbutton.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viergewinnt.Spiel">
    <children>
@@ -244,7 +245,13 @@
             </children>
       </GridPane>
       <ProgressBar fx:id="spielfeld_progressbar" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="277.0" progress="0.0" />
-      <Button fx:id="spielfeld_verlassen" layoutX="873.0" layoutY="14.0" mnemonicParsing="false" onAction="#verlassen" prefHeight="38.0" prefWidth="113.0" styleClass="rot" text="Verlassen" />
-      <Button fx:id="spielfeld_pause" layoutX="444.0" layoutY="14.0" mnemonicParsing="false" onAction="#pause" prefHeight="38.0" prefWidth="113.0" styleClass="gruen" text="Start" />
+      <Button fx:id="spielfeld_verlassen" layoutX="873.0" layoutY="14.0" mnemonicParsing="false" onAction="#verlassen" prefHeight="38.0" prefWidth="113.0" styleClass="blau" text="Verlassen">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="spielfeld_pause" layoutX="444.0" layoutY="14.0" mnemonicParsing="false" onAction="#pause" prefHeight="38.0" prefWidth="113.0" styleClass="blau" text="Start">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

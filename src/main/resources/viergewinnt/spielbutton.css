@@ -11,9 +11,9 @@
 }
 
 .rot{
-    -fx-background-color: #E53935;
+    -fx-background-color: #D81B60;
     -fx-text-fill: #000000;
-    -fx-opacity: 0.9;
+    -fx-opacity: 0.8;
 }
 
 .gelb{
@@ -29,8 +29,8 @@
 }
 
 .blau{
-    -fx-background-color: #1E88E5;
-    -fx-text-fill: #000000;
+    -fx-background-color: #0D47A1;
+    -fx-text-fill: #FFFFFF;
     -fx-opacity: 0.8;
 }
 
@@ -42,4 +42,10 @@
     -fx-background-color: #EEEEEE;
     -fx-text-fill: #757575;
     -fx-opacity: 0.5;
+}
+
+.grau{
+    -fx-background-color: #212121;
+    -fx-text-fill: #FFFFFF;
+    -fx-opacity: 0.8;
 }
