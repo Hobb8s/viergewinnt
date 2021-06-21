@@ -107,12 +107,12 @@ jobs:
       
       - name: Rendert die README-template.md Dateien
         run: |
-          cd templater
           deno run --allow-read --allow-write --allow-env --unstable templater.ts
         env:
           TAG: ${{ steps.vars.outputs.tag }}
-          STDIN: ..\server\README-template.md,..\README-template.md
-          STDOUT: ..\server\README.md,..\README.md
+          STDIN: ../server/README-template.md,../README-template.md
+          STDOUT: ../server/README.md,../README.md
+        working-directory: ./templater
 
       - name: Commit README.md
         uses: EndBug/add-and-commit@v7
