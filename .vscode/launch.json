@@ -10,6 +10,26 @@
             "request": "launch",
             "mainClass": "org.example/viergewinnt.Main",
             "projectName": "viergewinnt"
+        },
+        
+        {
+            "name": "Deno",
+            "type": "pwa-node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/templater",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--allow-all",
+                "--unstable",
+                "--inspect-brk",
+                "templater.ts",
+                "assets",
+                "--out",
+                "test",
+            ],
+            "outputCapture": "std",
+            "attachSimplePort": 9229
         }
     ]
 }
