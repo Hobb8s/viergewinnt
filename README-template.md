@@ -1,10 +1,10 @@
 # Viergewinnt
 Viergewinnt ist eine programmierte Version vom beliebten Strategiespiel Vier gewinnt.
 ## Herunterladen
-[Windows](https://github.com/Hobb8s/viergewinnt)  
-[Linux](https://github.com/Hobb8s/viergewinnt)  
-[Mac OS X](https://github.com/Hobb8s/viergewinnt)  
-[Serverherunterladen](https://github.com/Hobb8s/viergewinnt)
+[👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/{{tag}}/viergewinnt-windows.exe)  
+[👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/{{tag}}/viergewinnt-linux.exe)  
+[👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/{{tag}}/viergewinnt-macos.exe)  
+[👉 Server herunterladen](https://github.com/Hobb8s/viergewinnt/tree/main/server#readme)
 ## Spielweise
 Man wirft abwechselnd kleine Chips in ein Gitter und versucht vor dem Gegenspieler vier oder mehr Chips vertikal, horizontal oder diagonal in eine Reihe zu bringen.
 Das Spiel ist vorbei wenn ein Spieler entweder keine Chips mehr legen kann, weil das Spielfeld voll ist (somit wäre das Ergebnis ein Unentschieden) oder einer, vier oder mehr Chips in einer Reihe hat (in diesem Fall hat der Spieler gewonnen).

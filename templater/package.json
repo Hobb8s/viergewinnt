@@ -1,0 +1,5 @@
+{
+	"scripts": {
+        "run": "deno run --allow-read --allow-write --allow-env --unstable templater.ts"
+    }
+}

@@ -13,14 +13,14 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: test4-1.0-SNAPSHOT.jar
-            asset_name: viergewinnt-linux-amd64.jar
+            artifact_name: viergewinnt-1.0-SNAPSHOT.jar
+            asset_name: viergewinnt-linux.jar
           - os: windows-latest
-            artifact_name: test4-1.0-SNAPSHOT.jar
-            asset_name: viergewinnt-windows-amd64.jar
+            artifact_name: viergewinnt-1.0-SNAPSHOT.jar
+            asset_name: viergewinnt-windows.jar
           - os: macos-latest
-            artifact_name: test4-1.0-SNAPSHOT.jar
-            asset_name: viergewinnt-macos-amd64.jar
+            artifact_name: viergewinnt-1.0-SNAPSHOT.jar
+            asset_name: viergewinnt-macos.jar
 
     steps:
       - uses: actions/checkout@v2
@@ -56,12 +56,12 @@ jobs:
           cd server/
           yarn install
           yarn build
-          ls build -la
+          mv build/viergewinnt-server-win build/viergewinnt-server-windows
       - name: Hochladen der kompelierten NodeJS zum Github Release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./server/build/vier-gewinnt-server*
+          file: ./server/build/viergewinnt-server*
           tag: ${{ github.ref }}
           file_glob: true
 
@@ -75,7 +75,6 @@ jobs:
         uses: docker-practice/actions-setup-docker@master
       - run: |
           docker build --pull --rm -f "server/dockerfile" -t viergewinnt:latest "server"
-          docker image ls
           docker save -o viergewinnt-docker.tar viergewinnt:latest
 
       - name: Hochladen des Docker Images zum Github Release
@@ -84,3 +83,41 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./viergewinnt-docker.tar
           tag: ${{ github.ref }}
+
+  render-README:
+    name: Rendert die README-template.md Dateien
+    runs-on: ubuntu-latest
+
+    needs:
+      - publish-java
+      - publish-nodejs
+      - publish-docker
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Deno installieren
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: 1.11.1
+
+      - name: Finde den aktuellen Tag herraus
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      
+      - name: Rendert die README-template.md Dateien
+        run: |
+          cd templater
+          deno run --allow-read --allow-write --allow-env --unstable templater.ts
+        env:
+          TAG: ${{ steps.vars.outputs.tag }}
+          STDIN: ..\server\README-template.md,..\README-template.md
+          STDOUT: ..\server\README.md,..\README.md
+
+      - name: Commit README.md
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Felix-07-11
+          author_email: felixwochnick@gmail.com
+          message: 'README.md gerendert'
+          add: '*.md'
