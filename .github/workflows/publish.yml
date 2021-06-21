@@ -114,10 +114,13 @@ jobs:
           STDOUT: ../server/README.md,../README.md
         working-directory: ./templater
 
-      - name: Commit README.md
-        uses: EndBug/add-and-commit@v7
+      - name: Commitet die gerenderten README.md Dateien
+        run: |
+          git config --local user.email "felixwochnick@gmail.com"
+          git config --local user.name "Felix-07-11"
+          git commit -m "README.md gerendert" -a
+      - name: Push
+        uses: ad-m/github-push-action@master
         with:
-          author_name: Felix-07-11
-          author_email: felixwochnick@gmail.com
-          message: 'README.md gerendert'
-          add: '*.md'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
