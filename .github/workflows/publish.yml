@@ -56,7 +56,7 @@ jobs:
           cd server/
           yarn install
           yarn build
-          mv build/viergewinnt-server-win build/viergewinnt-server-windows
+          mv build/viergewinnt-server-win.exe build/viergewinnt-server-windows.exe
       - name: Hochladen der kompelierten NodeJS zum Github Release
         uses: svenstaro/upload-release-action@v2
         with:
