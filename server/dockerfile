@@ -3,6 +3,6 @@ WORKDIR /tmp/app
 COPY package.json ./
 COPY dist/* ./dist/
 RUN npm install --production --silent
-EXPOSE 3000
+EXPOSE ${PORT}
 ENV EXETYPE=DOCKER
 CMD ["npm", "run", "runjs"]

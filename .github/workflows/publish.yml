@@ -1,0 +1,86 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish-java:
+    name: Baut & Veröffentlicht die Jar Datei für ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: test4-1.0-SNAPSHOT.jar
+            asset_name: viergewinnt-linux-amd64.jar
+          - os: windows-latest
+            artifact_name: test4-1.0-SNAPSHOT.jar
+            asset_name: viergewinnt-windows-amd64.jar
+          - os: macos-latest
+            artifact_name: test4-1.0-SNAPSHOT.jar
+            asset_name: viergewinnt-macos-amd64.jar
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Installiere Java JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: "16"
+          distribution: "adopt"
+
+      - name: Baut & Packt das Maven Projekt
+        run: mvn -B package --file pom.xml && mvn package
+
+      - name: Hochladen der Jar Dateien zum Github Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/${{ matrix.artifact_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
+
+  publish-nodejs:
+    name: Baut & Veröffentlicht die Server Dateien
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.16.0
+      - run: |
+          cd server/
+          yarn install
+          yarn build
+          ls build -la
+      - name: Hochladen der kompelierten NodeJS zum Github Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./server/build/vier-gewinnt-server*
+          tag: ${{ github.ref }}
+          file_glob: true
+
+  publish-docker:
+    name: Baut & Veröffentlicht das Docker Image des Servers
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker installieren
+        uses: docker-practice/actions-setup-docker@master
+      - run: |
+          docker build --pull --rm -f "server/dockerfile" -t viergewinnt:latest "server"
+          docker image ls
+          docker save -o viergewinnt-docker.tar viergewinnt:latest
+
+      - name: Hochladen des Docker Images zum Github Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./viergewinnt-docker.tar
+          tag: ${{ github.ref }}

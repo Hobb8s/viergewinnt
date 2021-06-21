@@ -79,7 +79,7 @@ public class Multiplayer implements Initializable {
 	 * Öffnet einen Link, dass man den Viergewinnt-Server herrunterladen kann
 	 */
 	public void herunterladen() {
-		App.app.oeffneWebAdresse("https://github.com/Hobb8s/viergewinnt");
+		App.app.oeffneWebAdresse("https://github.com/Hobb8s/viergewinnt/tree/main/server#viergewinnt-server");
 	}
 
 	/**
