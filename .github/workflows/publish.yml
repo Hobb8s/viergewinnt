@@ -75,13 +75,13 @@ jobs:
         uses: docker-practice/actions-setup-docker@master
       - run: |
           docker build --pull --rm -f "server/dockerfile" -t viergewinnt:latest "server"
-          docker save -o viergewinnt-docker.tar viergewinnt:latest
+          docker save -o viergewinnt-server-docker.tar viergewinnt:latest
 
       - name: Hochladen des Docker Images zum Github Release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./viergewinnt-docker.tar
+          file: ./viergewinnt-server-docker.tar
           tag: ${{ github.ref }}
 
   render-README:
