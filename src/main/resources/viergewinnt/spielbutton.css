@@ -49,3 +49,7 @@
     -fx-text-fill: #FFFFFF;
     -fx-opacity: 0.8;
 }
+
+.github{
+    -fx-background-image: url("https://www.efinancialcareers.ch/binaries/content/gallery/efinancial-careers/articles/2019/04/github.jpg");
+}
