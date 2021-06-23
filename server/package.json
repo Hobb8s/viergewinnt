@@ -34,6 +34,7 @@
     "devDependencies": {
         "@types/copy-paste": "^1.1.30",
         "@types/inquirer": "^7.3.1",
+        "@types/node": "^15.12.4",
         "@types/ws": "^7.4.4",
         "nodemon": "^2.0.7",
         "pkg": "^5.2.0",
