@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class VierGewinnt {
 
@@ -27,6 +28,10 @@ public class VierGewinnt {
 
 	public static Spieler getAktivenSpieler() {
 		return spieler.get(aktivenSpieler);
+	}
+
+	public static Spieler getPassivenSpieler() {
+		return spieler.get(1 - aktivenSpieler);
 	}
 
 	public static boolean muliplayerModus = false;
@@ -158,6 +163,26 @@ public class VierGewinnt {
 		return false;
 	}
 
+	private static String linksGleich(int x, int y, ArrayList<String> richtung) {
+
+		if (richtung.contains("links") && x - 1 >= 0 && x < spielfeld.length && y >= 0 && y < 6
+					&& VierGewinnt.spielfeld[x - 1].size() > y && VierGewinnt.spielfeld[x - 1].get(y) == getAktivenSpieler().id) {
+			return "links";
+		}
+
+		if (richtung.contains("linksoben") && x - 1 >= 0 && x < spielfeld.length && y >= 0 && y + 1 < 6
+					&& VierGewinnt.spielfeld[x - 1].size() > y + 1 && VierGewinnt.spielfeld[x - 1].get(y + 1) == getAktivenSpieler().id) {
+			return "linksoben";
+		}
+
+		if (richtung.contains("linksunten") && x - 1 >= 0 && x < spielfeld.length && y - 1 >= 0 && y < 6
+					&& VierGewinnt.spielfeld[x - 1].size() > y - 1 && VierGewinnt.spielfeld[x - 1].get(y - 1) == getAktivenSpieler().id) {
+			return "linksunten";
+		}
+
+		return null;
+	}
+
 	private static boolean überprüfeAnzahlSteine(int x, int y, String richtung) {
 
 		if (richtung == "unten") {
@@ -256,11 +281,47 @@ public class VierGewinnt {
 		String[] richtungen = new String[] { "unten", "rechts", "links", "rechtsoben", "rechtsunten", "linksoben",
 				"linksunten" };
 
+		ArrayList<String> möglich = new ArrayList<String>();
+
+		möglich.add("links");
+		möglich.add("linksoben");
+		möglich.add("linksunten");
+
 		for (int i = 0; i < richtungen.length; i++) {
-			if (istImFeld(x, y, richtungen[i]) && überprüfeAnzahlSteine(x, y, richtungen[i])
-					&& überprüfeSteineVonSpielern(x, y, richtungen[i])) {
+			if (!istImFeld(x, y, richtungen[i]))
+				continue;
+			if (überprüfeAnzahlSteine(x, y, richtungen[i]) && überprüfeSteineVonSpielern(x, y, richtungen[i]))
 				return true;
+
+			String lg = linksGleich(x, y, möglich);
+			while (lg != null) {
+				switch (lg) {
+					case "links":
+						möglich.clear();
+						möglich.add("links");
+						x = x - 1;
+						break;
+
+					case "linksoben":
+						möglich.clear();
+						möglich.add("linksoben");
+						x = x - 1;
+						y = y + 1;
+						break;
+
+					case "linksunten":
+						möglich.clear();
+						möglich.add("linksunten");
+						x = x - 1;
+						y = y + 1;
+						break;
+				}
+
+				lg = linksGleich(x, y, möglich);
 			}
+
+			if (istImFeld(x, y, richtungen[i]) && überprüfeAnzahlSteine(x, y, richtungen[i]) && überprüfeSteineVonSpielern(x, y, richtungen[i]))
+				return true;
 		}
 
 		return false;
