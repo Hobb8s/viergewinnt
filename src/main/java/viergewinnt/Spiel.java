@@ -281,11 +281,11 @@ public class Spiel implements Initializable {
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 
-	// Informationsfenster für die abgelaufene Zeit
+	// Informationsfenster für die abgelaufene Zeit und den Gewinn des passiven Spielers
 	public void ZeitAlert() {
 		Alert zeitVorbei = new Alert(AlertType.INFORMATION);
 		zeitVorbei.setTitle("Ablauf der Zeit");
-		zeitVorbei.setContentText("Leider waren Sie zu langsam und die Zeit ist abgelaufen.");
+		zeitVorbei.setContentText("Leider waren Sie, " + VierGewinnt.getAktivenSpieler().name + ", zu langsam und die Zeit ist abgelaufen. Dies bedeutet, dass " + VierGewinnt.getPassivenSpieler().name + "das Spiel gewonnen hat.");
 		zeitVorbei.showAndWait().ifPresent(rs -> {
 			if (rs == ButtonType.OK) {
 				try {
@@ -378,7 +378,7 @@ public class Spiel implements Initializable {
 			if (überprüfeHatGewonnen(x, y))
 				return;
 
-			// Wenn keiner gewonnen hat wird der aktive Spieler geändert / gewchselt und die
+			// Wenn keiner gewonnen hat wird der aktive Spieler geändert / gewechselt und die
 			// nächste Runde beginnt.
 			spielerWechseln();
 
@@ -390,11 +390,13 @@ public class Spiel implements Initializable {
 
 	}
 
+
 	private boolean überprüfeHatGewonnen(int x, int y) {
 		Spieler hatGewonnen = VierGewinnt.hatGewonnen(x, y);
 
 		if (hatGewonnen == null)
 			return false;
+
 
 		// Der Timer wird gestoppt, der Text des Pause-Button für das nächste Spiel auf
 		// Start gesetzt und die

@@ -1,5 +1,6 @@
 package viergewinnt;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -88,115 +89,146 @@ public class Singleplayer implements Initializable{
     }
 
     // Erstellen des ersten Spielers mit dem angegebenen Namen und der ausgewählten Farbe
-    public void FarbWahlSpieler1()
+    public void FarbWahlSpieler1() throws IOException
     {
-        try {
-            if (single_farbwahl1.getValue() == "Rot")
-            {
-                VierGewinnt.zuruecksetzen();
-                VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.RED);
-            }
-            else
-            {
-                if (single_farbwahl1.getValue() == "Orange")
-                {
-                    VierGewinnt.zuruecksetzen();
-                    VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.ORANGE);
-                }
-                else
-                {
-                    if (single_farbwahl1.getValue() == "Gelb")
+        VierGewinnt.zuruecksetzen();
+        String farbe1 = single_farbwahl1.getValue();
+
+        switch (farbe1)
+        {
+                case "Rot":
+                    try
                     {
-                        VierGewinnt.zuruecksetzen();
+                        VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.RED);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+                case "Orange":
+                    try
+                    {
+                        VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.ORANGE);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                case "Gelb":
+                    try
+                    {
                         VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.YELLOW);
                     }
-                    else
+                    catch (Exception e)
                     {
-                        if (single_farbwahl1.getValue() == "Grün")
-                        {
-                            VierGewinnt.zuruecksetzen();
-                            VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.GREEN);
-                        }
-                        else
-                        {
-                            if (single_farbwahl1.getValue() == "Blau")
-                            {
-                                VierGewinnt.zuruecksetzen();
-                                VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.BLUE);
-                            }
-                            else
-                            {
-                                if (single_farbwahl1.getValue() == "Schwarz")
-                                {
-                                    VierGewinnt.zuruecksetzen();
-                                    VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.BLACK);
-                                }
-                            }
-                        }
+                        e.printStackTrace();
                     }
-                }
 
-            }
+                case "Grün":
+                    try
+                    {
+                        VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.GREEN);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
 
+                case "Blau":
+                    try
+                    {
+                        VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.BLUE);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+                case "Schwarz":
+                    try
+                    {
+                        VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.BLACK);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        };
-
     }
+
 
     // Erstellen des zweiten Spielers mit dem angegebenen Namen und der ausgewählten Farbe
     public void FarbWahlSpieler2()
     {
-        try {
-            if (single_farbwahl2.getValue() == "Rot")
-            {
-                VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.RED);
-            }
-            else
-            {
-                if (single_farbwahl2.getValue() == "Orange")
+        String farbe2 = single_farbwahl2.getValue();
+
+        switch (farbe2)
+        {
+            case "Rot":
+                try
+                {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.RED);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+            case "Orange":
+                try
                 {
                     VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.ORANGE);
                 }
-                else
+                catch (Exception e)
                 {
-                    if (single_farbwahl2.getValue() == "Gelb")
-                    {
-                        VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.YELLOW);
-                    }
-                    else
-                    {
-                        if (single_farbwahl2.getValue() == "Grün")
-                        {
-                            VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.GREEN);
-                        }
-                        else
-                        {
-                            if (single_farbwahl2.getValue() == "Blau")
-                            {
-                                VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLUE);
-                            }
-                            else
-                            {
-                                if (single_farbwahl2.getValue() == "Schwarz")
-                                {
-                                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLACK);
-                                }
-                            }
-                        }
-                    }
+                    e.printStackTrace();
                 }
 
-            }
+            case "Gelb":
+                try
+                {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.YELLOW);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
 
+            case "Grün":
+                try
+                {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.GREEN);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+            case "Blau":
+                try
+                {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLUE);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+            case "Schwarz":
+                try
+                {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLACK);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        };
+
+
     }
+
 }
 
 
