@@ -32,7 +32,7 @@ docker load -i viergewinnt-server-docker.tar
 ```
 2. Starten Sie den Docker-Container mit dem geladenen Dockerimage
 ```sh
-docker run -d --name viergewinnt-server -p 3000:3000 -e ERSTELLE_AUTOMATISCH_RAEUME=TRUE -e PORT=3000 viergewinnt:latest
+docker run -d --name viergewinnt-server -p 3000:3000 -e ERSTELLE_AUTOMATISCH_RAEUME=TRUE -e PORT=3000 --restart=always viergewinnt:latest
 ```
 3. Anschließend ist der Server lokal erreichbar unter `ws://127.0.0.1:3000`.
 
