@@ -295,6 +295,11 @@ public class VierGewinnt {
 
 			String lg = linksGleich(x, y, möglich);
 			while (lg != null) {
+				System.out.println("################################");
+				System.out.println(lg);
+				System.out.println(x);
+				System.out.println(y);
+				System.out.println("####");
 				switch (lg) {
 					case "links":
 						möglich.clear();
@@ -313,9 +318,14 @@ public class VierGewinnt {
 						möglich.clear();
 						möglich.add("linksunten");
 						x = x - 1;
-						y = y + 1;
+						y = y - 1;
 						break;
 				}
+
+				System.out.println(lg);
+				System.out.println(x);
+				System.out.println(y);
+				System.out.println("################################");
 
 				lg = linksGleich(x, y, möglich);
 			}
