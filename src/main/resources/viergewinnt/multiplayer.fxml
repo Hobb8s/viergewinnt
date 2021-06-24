@@ -12,10 +12,7 @@
         </image>
     </ImageView>
     <Button fx:id="multi_zurueck" layoutX="89.0" layoutY="578.0" mnemonicParsing="false" onAction="#zurueck" scaleX="1.8" scaleY="1.8" styleClass="blau" text="Zurück" />
-    <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" onAction="#start" scaleX="1.8" scaleY="1.8" styleClass="aus" text="Starten">
-      <font>
-         <Font name="System Bold" size="12.0" />
-      </font></Button>
+    <Button fx:id="multi_starten" layoutX="284.0" layoutY="578.0" mnemonicParsing="false" onAction="#start" scaleX="1.8" scaleY="1.8" styleClass="blau" text="Starten" />
    <Button fx:id="multi_verbinden" layoutX="502.0" layoutY="578.0" mnemonicParsing="false" onAction="#verbinden" scaleX="1.8" scaleY="1.8" styleClass="blau" text="Verbinden">
       <font>
          <Font name="System Bold" size="12.0" />
