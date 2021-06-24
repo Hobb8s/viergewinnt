@@ -285,7 +285,7 @@ public class Spiel implements Initializable {
 	public void ZeitAlert() {
 		Alert zeitVorbei = new Alert(AlertType.INFORMATION);
 		zeitVorbei.setTitle("Ablauf der Zeit");
-		zeitVorbei.setContentText("Leider waren Sie, " + VierGewinnt.getAktivenSpieler().name + ", zu langsam und die Zeit ist abgelaufen. Dies bedeutet, dass " + VierGewinnt.getPassivenSpieler().name + "das Spiel gewonnen hat.");
+		zeitVorbei.setContentText("Leider waren Sie, " + VierGewinnt.getAktivenSpieler().name + ", zu langsam und die Zeit ist abgelaufen. Dies bedeutet, dass " + VierGewinnt.getpassivenSpieler().name + " das Spiel gewonnen hat.");
 		zeitVorbei.showAndWait().ifPresent(rs -> {
 			if (rs == ButtonType.OK) {
 				try {

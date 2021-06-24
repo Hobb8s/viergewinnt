@@ -75,7 +75,7 @@ public class Singleplayer implements Initializable {
     }
 
     // Erstellen eines Array mit den verschiedenen möglichen Farben
-    private String[] farben = { "Rot", "Orange", "Gelb", "Grün", "Blau", "Schwarz" };
+    private String[] farben = { "Rot", "Orange", "Gelb", "Grün", "Blau", "Schwarz", "Türkis", "Magenta" };
 
     // Einfügen des Array in die beiden Choice-Boxen
     @Override
@@ -137,6 +137,22 @@ public class Singleplayer implements Initializable {
                 }
                 break;
 
+            case "Türkis":
+                try {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.rgb(64, 224, 208));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "Magenta":
+                try {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.MAGENTA);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
         }
     }
 
@@ -187,6 +203,22 @@ public class Singleplayer implements Initializable {
             case "Schwarz":
                 try {
                     VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLACK);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "Türkis":
+                try {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.rgb(64, 224, 208));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "Magenta":
+                try {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.MAGENTA);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
