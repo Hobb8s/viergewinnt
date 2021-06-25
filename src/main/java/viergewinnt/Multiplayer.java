@@ -245,6 +245,7 @@ public class Multiplayer implements Initializable {
 			multi_tableview.setItems(VierGewinnt.getSpieler());
 
 			verbunden = true;
+			VierGewinnt.muliplayerModus = true;
 
 		} catch (Exception e) {
 			zeigeAlert(Alert.AlertType.ERROR, "Fehler", e.getMessage());
