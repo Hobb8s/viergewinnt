@@ -4,11 +4,11 @@ viergewinnt\Singleplayer.class
 viergewinnt\App.class
 viergewinnt\WebSocketClient$NachrichtenBearbeitung.class
 viergewinnt\StartBildschirm.class
-viergewinnt\Spiel$1.class
-viergewinnt\Spieler.class
 viergewinnt\Spiel$2.class
-viergewinnt\WebSocketClient.class
 viergewinnt\Multiplayer.class
 module-info.class
 viergewinnt\VierGewinnt.class
+viergewinnt\Spiel$1.class
+viergewinnt\Spieler.class
+viergewinnt\WebSocketClient.class
 viergewinnt\Multiplayer$1.class
