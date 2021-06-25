@@ -21,7 +21,7 @@
    <TextField fx:id="multi_namenswahl" layoutX="168.0" layoutY="130.0" promptText="Name" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TextField fx:id="multi_internetadresse" layoutX="168.0" layoutY="245.0" promptText="127.0.0.1:3000" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TextField fx:id="multi_raum_ID" layoutX="630.0" layoutY="245.0" promptText="Raum ID" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
-   <ColorPicker fx:id="multi_farbwahl" layoutX="624.0" layoutY="130.0" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
+    <ChoiceBox fx:id="multi_farbwahl" layoutX="624.0" layoutY="130.0" scaleX="1.8" scaleY="1.8" styleClass="transparent" />
    <TableView fx:id="multi_tableview" layoutX="108.0" layoutY="345.0" prefHeight="94.0" prefWidth="731.0" styleClass="transparent" />
 
 

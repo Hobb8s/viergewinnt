@@ -10,6 +10,7 @@ import javax.json.Json;
 import javax.json.JsonArray;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -35,7 +36,7 @@ public class Multiplayer implements Initializable {
 	@FXML
 	public TableView<Spieler> multi_tableview;
 	@FXML
-	public ColorPicker multi_farbwahl;
+	public ChoiceBox<String> multi_farbwahl;
 
 	private boolean verbunden = false;
 
@@ -53,6 +54,9 @@ public class Multiplayer implements Initializable {
 
 		multi_tableview.getColumns().addAll(name, farbe);
 		multi_tableview.setItems(VierGewinnt.getSpieler());
+
+		multi_farbwahl.getItems().addAll(VierGewinnt.farben);
+
 	}
 
 	/**
@@ -198,8 +202,44 @@ public class Multiplayer implements Initializable {
 			// aktualisiert die Tableview
 			// ---------------------------------------------------------------------------------
 
+			String farbewahl = multi_farbwahl.getValue();
+			Color farbe = null;
+
+			switch (farbewahl) {
+				case "Rot":
+					farbe = Color.RED;
+					break;
+
+				case "Gelb":
+					farbe = Color.YELLOW;
+
+				case "Grün":
+					farbe = Color.GREEN;
+					break;
+
+				case "Blau":
+					farbe = Color.BLUE;
+					break;
+
+				case "Schwarz":
+					farbe = Color.BLACK;
+					break;
+
+				case "Türkis":
+					farbe = Color.rgb(64, 224, 208);
+					break;
+
+				case "Magenta":
+					farbe = Color.MAGENTA;
+					break;
+
+				default:
+					farbe = Color.ORANGE;
+					break;
+
+			}
 			WebSocketClient.client.raumId = multi_raum_ID.getText();
-			Spieler spieler = new Spieler(0, multi_farbwahl.getValue(), multi_namenswahl.getText()).setUuid();
+			Spieler spieler = new Spieler(0, farbe, multi_namenswahl.getText()).setUuid();
 			WebSocketClient.client.sendMessage(Json
 					.createObjectBuilder().add("aktion", "trete Raum bei").add("daten", Json.createObjectBuilder()
 							.add("raumId", WebSocketClient.client.raumId).add("spieler", spieler.toJson()))

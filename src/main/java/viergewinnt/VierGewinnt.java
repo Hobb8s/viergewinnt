@@ -8,15 +8,17 @@ import java.util.ArrayList;
 
 public class VierGewinnt {
 
-	/**
-	 * Spielfeld (7 breit, 6 hoch)
-	 */
+	// Array mit den verschiedenen möglichen Farben der Spieler
+	public static String[] farben = { "Rot", "Orange", "Gelb", "Grün", "Blau", "Schwarz", "Türkis", "Magenta" };
+
+	// Spielfeld
 	private static ArrayList<Integer>[] spielfeld;
 
 	public static ArrayList<Integer>[] getSpielfeld() {
 		return spielfeld;
 	}
 
+	// Liste in denene die Spielerobjekte gespeichert werden
 	private static ObservableList<Spieler> spieler;
 
 	public static ObservableList<Spieler> getSpieler() {
@@ -29,9 +31,7 @@ public class VierGewinnt {
 		return spieler.get(aktivenSpieler);
 	}
 
-	private static int passiverSpieler = 1;
-
-	public static Spieler getpassivenSpieler() { return spieler.get(passiverSpieler);}
+	public static Spieler getpassivenSpieler() { return spieler.get(1 - aktivenSpieler); }
 
 	public static boolean muliplayerModus = false;
 

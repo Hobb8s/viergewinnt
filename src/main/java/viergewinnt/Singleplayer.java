@@ -74,14 +74,11 @@ public class Singleplayer implements Initializable {
         App.setRoot("startBildschirm");
     }
 
-    // Erstellen eines Array mit den verschiedenen möglichen Farben
-    private String[] farben = { "Rot", "Orange", "Gelb", "Grün", "Blau", "Schwarz", "Türkis", "Magenta" };
-
     // Einfügen des Array in die beiden Choice-Boxen
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        single_farbwahl1.getItems().addAll(farben);
-        single_farbwahl2.getItems().addAll(farben);
+        single_farbwahl1.getItems().addAll(VierGewinnt.farben);
+        single_farbwahl2.getItems().addAll(VierGewinnt.farben);
     }
 
     // Erstellen des ersten Spielers mit dem angegebenen Namen und der ausgewählten
@@ -99,13 +96,6 @@ public class Singleplayer implements Initializable {
                 }
                 break;
 
-            case "Orange":
-                try {
-                    VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.ORANGE);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
             case "Gelb":
                 try {
                     VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.YELLOW);
@@ -148,6 +138,14 @@ public class Singleplayer implements Initializable {
             case "Magenta":
                 try {
                     VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.MAGENTA);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            default:
+                try {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.ORANGE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -219,6 +217,14 @@ public class Singleplayer implements Initializable {
             case "Magenta":
                 try {
                     VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.MAGENTA);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            default:
+                try {
+                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLUE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

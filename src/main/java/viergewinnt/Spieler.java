@@ -25,7 +25,6 @@ public class Spieler {
     }
 
     private String uuid;
-
     public String getUuid() {
         return uuid;
     }
