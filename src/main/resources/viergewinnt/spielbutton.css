@@ -16,18 +16,6 @@
     -fx-opacity: 0.8;
 }
 
-.gelb{
-    -fx-background-color: #FDD835;
-    -fx-text-fill: #000000;
-    -fx-opacity: 0.8;
-}
-
-.gruen{
-    -fx-background-color: #43A047;
-    -fx-text-fill: #000000;
-    -fx-opacity: 0.8;
-}
-
 .blau{
     -fx-background-color: #0D47A1;
     -fx-text-fill: #FFFFFF;
@@ -38,18 +26,9 @@
     -fx-opacity: 0.8;
 }
 
-.aus{
-    -fx-background-color: #EEEEEE;
-    -fx-text-fill: #757575;
-    -fx-opacity: 0.5;
-}
 
 .grau{
     -fx-background-color: #212121;
     -fx-text-fill: #FFFFFF;
     -fx-opacity: 0.8;
-}
-
-.github{
-    -fx-background-image: url("https://www.efinancialcareers.ch/binaries/content/gallery/efinancial-careers/articles/2019/04/github.jpg");
 }

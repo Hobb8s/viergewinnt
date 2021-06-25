@@ -75,4 +75,5 @@ Mithilfe von GitHub speichern wir unsere Projekte und benutzen es zur Versionsko
 
 Wir haben GitHub Workflow benutz, um die Programme für alle Platformen zu bauen/kompilieren.  
 Immer wenn ein neuer Releas erstellt wird, werden die Apps automatisch mit Hilfe von GitHub gebaut.  
+
 ![img.png](dokumentation_bilder/img.png)
