@@ -7,7 +7,8 @@
   - [Organisationsplan](#Organisationsplan)
   - [Entwurfsmethode](#Entwurfsmethode)
   - [Aufgewandet Resourcen](#Aufgewandet-Resourcen)
-  - [Github Workflow](#Github-Workflow)
+  - [GitHub](#GitHub)
+  - [Github Workflow](#GitHub-Workflow)
 
 
 ##  verschiedene Spielmodi
@@ -18,7 +19,7 @@ Der zweite Modus ist der Multiplayer, bei dem man über das Internet gegeneinand
 
 ##  Interaktion zwischen Server und Client
 
-Websockets ist eine typische Web-Technologie
+Websockets ist eine typische Web-Technologie.
 
 Alle Clients kommunizieren mit dem Server mithilfe des Websocket-Protokoll (ws://...:...). Zum Verbinden wird außerdem eine RaumID benötigt.  
 Der Server kann unbegrenzt viele Verbindungen mit Clients aufbauen. Alle Verbindugen werden in Räumen organisiert mit einer eindeutigen RoomID.
@@ -66,7 +67,11 @@ Sprachen:
 - YAML (GitHub Workflow)
 
 
-##  Github Workflow
+##  GitHub
+Mithilfe von GitHub speichern wir unsere Projekte und benutzen es zur Versionskontrolle. Außerdem wird über GitHub die App veröffentlich und gebaut (siehe [Github Workflow](#GitHub-Workflow)).
+
+
+##  GitHub Workflow
 
 Wir haben GitHub Workflow benutz, um die Programme für alle Platformen zu bauen/kompilieren.  
 Immer wenn ein neuer Releas erstellt wird, werden die Apps automatisch mit Hilfe von GitHub gebaut.  
