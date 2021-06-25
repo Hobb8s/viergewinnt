@@ -129,6 +129,7 @@ public class Multiplayer implements Initializable {
 							// ---------------------------------------------------------------------------------
 							// Liest das Json Schema: Spieler[]
 							// ---------------------------------------------------------------------------------
+
 							JsonArray spielerArray = Json.createReader(new StringReader(daten)).readArray();
 
 							Spieler spieler1 = Spieler.ladeJson(spielerArray.getJsonObject(0).toString(), 1);
@@ -138,7 +139,7 @@ public class Multiplayer implements Initializable {
 
 							if (!VierGewinnt.getSpieler().get(0).getUuid().equals(spieler1.getUuid()))
 								VierGewinnt.spielerHinzufuegen(spieler1);
-							if (spieler2 != null
+							else if (spieler2 != null
 									&& !VierGewinnt.getSpieler().get(0).getUuid().equals(spieler2.getUuid())) {
 								VierGewinnt.spielerHinzufuegen(spieler2);
 								VierGewinnt.spielerWechseln();
