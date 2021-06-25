@@ -227,7 +227,7 @@ public class Spiel implements Initializable {
 		});
 	}
 
-	// Bestätigen des Abbrechens des Spiels und Zurückgelangen zur
+	// Bei Bestätigung des Verlassens: Zurückgelangen zur
 	// startBildschirm.fxml und währenddessen Anhalten des Timers,
 	// der bei Verlassen des Spiels den Text des Pause-Buttons für das nächste Spiel
 	// auf Start setzt.
@@ -247,18 +247,23 @@ public class Spiel implements Initializable {
 		}
 	}
 
+
+	// zeit = Zeit, die ein Spieler zum Ausführen eines Zuges besitzt
+	private int zeit = 20;
+
 	// verbleibendeZeit = Zeit, die dem aktiven Spieler verbleibt, um den Spielzug
 	// durchzuführen
-	// PauseZahl = Erklärung folgt bei der Methode pause() ;)
-	// zeit = Zeit, die ein Spieler zum Ausführen eines Zuges besitzt
-	// Timer = Timer, der die aktuelle, noch zum Ausführen des Zuges übrige, Zeit
-	// bestimmt
-	private int zeit = 20;
 	private int verbleibendeZeit = 20;
+
+	// Pausezahl: Zahl, die den aktuellen Stand ausgibt:
+	// 			  0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start bei 0 und Weiter bei 2)
+	// 			  1 = Zeit läuft
 	private int PauseZahl = 0;
+
+	// Timer = Timer, der die aktuelle, noch zum Ausführen des Zuges übrige, Zeit bestimmt
 	private Timer timer = new Timer();
 
-	// Erstellt eine ProgressBar, die die noch verbleibende Zeit visuell zeigt und
+	// Erstellt eine ProgressBar, die die noch verbleibende Zeit visuell anzeigt und
 	// sich jede Sekunde aktualisiert
 	public void rueckwaertsProgressBar() {
 		TimerTask task = new TimerTask() {
@@ -269,7 +274,6 @@ public class Spiel implements Initializable {
 						verbleibendeZeit -= 1;
 						double zeitFürProgessbar = (double) verbleibendeZeit / (double) zeit;
 						spielfeld_progressbar.setProgress(zeitFürProgessbar);
-
 					}
 				} else {
 					verbleibendeZeit = zeit;
@@ -281,7 +285,7 @@ public class Spiel implements Initializable {
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 
-	// Informationsfenster für die abgelaufene Zeit und den Gewinn des passiven Spielers
+	// Informationsfenster bei Ablauf der Zeit, welches den Gewinn des passiven Spielers anzeigt
 	public void ZeitAlert() {
 		Alert zeitVorbei = new Alert(AlertType.INFORMATION);
 		zeitVorbei.setTitle("Ablauf der Zeit");
@@ -298,10 +302,7 @@ public class Spiel implements Initializable {
 		});
 	}
 
-	// Pausezahl: Zahl, die den aktuellen Stand ausgibt:
-	// 0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start bei 0 und
-	// Weiter bei 2)
-	// 1 = Zeit läuft
+	//Überprüfung der Pausezahl und anschließende Änderung des Textes des Button Pause
 	public void pause() {
 		if (PauseZahl == 0) {
 			rueckwaertsProgressBar();
@@ -422,6 +423,7 @@ public class Spiel implements Initializable {
 
 	}
 
+	//Der Spielstein wird an der angeklickten Position hinzugefügt
 	private void steinSetzen(int x, int y) {
 		try {
 			VierGewinnt.reiheSetzen(x, VierGewinnt.getAktivenSpieler());
@@ -433,11 +435,14 @@ public class Spiel implements Initializable {
 		}
 	}
 
+	//Der Spieler wechselt nach Ausführung eines Spielzuges und die für den Zug zur verfügung stehende Zeit wird
+	// auf 20 Sekunden gesetzt
 	private void spielerWechseln() {
 		verbleibendeZeit = zeit;
 		VierGewinnt.spielerWechseln();
 	}
 
+	//Anzeigen einer Information
 	public void zeigeAlert(Alert.AlertType typ, String titel, String nachricht) {
 		Alert a = new Alert(typ);
 		a.setTitle(titel);

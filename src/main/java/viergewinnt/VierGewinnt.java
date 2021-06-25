@@ -25,12 +25,14 @@ public class VierGewinnt {
 		return spieler;
 	}
 
+	//Der aktive Spieler, ist der Spieler, der den aktuellen Spielzug ausführt
 	private static int aktivenSpieler = 0;
 
 	public static Spieler getAktivenSpieler() {
 		return spieler.get(aktivenSpieler);
 	}
 
+	//Der passive Spieler, ist der Spieler, der den nächsten Spielzug ausführt
 	public static Spieler getpassivenSpieler() {
 		return spieler.get(1 - aktivenSpieler);
 	}
@@ -131,6 +133,7 @@ public class VierGewinnt {
 		return null;
 	}
 
+	//Überprüfung, ob sich der Spielstein im Spielfeld befindet
 	private static boolean istImFeld(int x, int y, String richtung) {
 
 		if (richtung == "unten") {
@@ -164,6 +167,7 @@ public class VierGewinnt {
 		return false;
 	}
 
+	//Überprüft die Anzahl der Steine und schließt anschließend unmögliche Gewinnmöglichkeiten aus
 	private static boolean überprüfeAnzahlSteine(int x, int y, String richtung) {
 
 		if (richtung == "unten") {
@@ -203,6 +207,7 @@ public class VierGewinnt {
 		return false;
 	}
 
+	//Überprüft, ob die Steine in die linke Richtung vom selben Spieler gelegt wurden
 	private static String linksGleich(int x, int y, ArrayList<String> richtung) {
 
 		if (richtung.contains("links") && x - 1 >= 0 && x < spielfeld.length && y >= 0 && y < 6
@@ -226,6 +231,7 @@ public class VierGewinnt {
 		return null;
 	}
 
+	//Überprüfung, ob vier Steine, die in einer Reihe liegen, vom selben Spieler gelegt wurden
 	private static boolean überprüfeSteineVonSpielern(int x, int y, String richtung) {
 
 		if (richtung == "unten") {
@@ -280,6 +286,8 @@ public class VierGewinnt {
 		return false;
 	}
 
+
+	//Überprüfung, ob vier Spielsteine in einer Reihe sind (egal ob horizontal, vertikal oder diagonal)
 	private static boolean sindVierInEinerReihe(int x, int y) {
 
 		String[] richtungen = new String[] { "unten", "rechts", "links", "rechtsoben", "rechtsunten", "linksoben",

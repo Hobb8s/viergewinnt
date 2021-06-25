@@ -18,6 +18,7 @@ public class App extends Application {
 
     public static App app;
 
+    //Starten der startBildschirm.fxml
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("startBildschirm"), 1000, 750);

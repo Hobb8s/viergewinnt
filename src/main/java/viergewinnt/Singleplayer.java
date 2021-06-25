@@ -24,6 +24,8 @@ public class Singleplayer implements Initializable {
     // unterschiedliche Farben ausgewählt wurden, andernfalls folgt eine
     // Fehlermeldung
     public void singleweiter() {
+
+        //Abfrage, die überprüft, ob zwei unterschiedliche Namen eingegeben wurden
         if (single_namenswahl1.getText() == null || single_namenswahl2.getText() == null
                 || single_namenswahl1.getText().equals(single_namenswahl2.getText())) {
             Alert keinName = new Alert(Alert.AlertType.INFORMATION);
@@ -34,7 +36,10 @@ public class Singleplayer implements Initializable {
                     System.out.println("OK gedrückt.");
                 }
             });
-        } else {
+        }
+        else
+        {
+            //Abfrage, die überprüft, ob unterschiedliche Farben ausgewählt wurden
             if (single_farbwahl1.getValue() == single_farbwahl2.getValue()) {
                 Alert gleicheFarbe = new Alert(Alert.AlertType.INFORMATION);
                 gleicheFarbe.setTitle("Fehler");
@@ -44,7 +49,10 @@ public class Singleplayer implements Initializable {
                         System.out.println("OK gedrückt.");
                     }
                 });
-            } else {
+            }
+            else {
+
+                //Abfrage, die überprüft, ob Farben ausgewählt wurden
                 if (single_farbwahl1.getValue() == null || single_farbwahl2.getValue() == null) {
                     Alert gleicheFarbe = new Alert(Alert.AlertType.ERROR);
                     gleicheFarbe.setTitle("Fehler");
@@ -56,6 +64,7 @@ public class Singleplayer implements Initializable {
                     });
                 } else {
 
+                    //Weiterleitung zur spiel.fxml, sofern unterschiedliche Namen und Farben ausgewählt wurden
                     try {
                         App.setRoot("spiel");
                         FarbWahlSpieler1();
