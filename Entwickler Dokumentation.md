@@ -14,6 +14,6 @@
 
 
 ![img.png](dokumentation_bilder/SindVierineinerReihe.jpg)
-![img.png](dokumentation_bilder/SindVierineinerReihe%20(1).jpg)
-![img.png](dokumentation_bilder/SindVierineinerReihe%20(2).jpg)
-![img.png](dokumentation_bilder/SindVierineinerReihe%20(3).jpg)
+![img.png](dokumentation_bilder/SindVierInEinerReihe2.png)
+![img.png](dokumentation_bilder/SindVierInEinerReihe3.png)
+![img.png](dokumentation_bilder/SindVierineinerReihe1.jpg)
