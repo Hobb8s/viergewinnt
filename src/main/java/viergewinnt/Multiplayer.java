@@ -221,10 +221,6 @@ public class Multiplayer implements Initializable {
 					farbe = Color.BLUE;
 					break;
 
-				case "Schwarz":
-					farbe = Color.BLACK;
-					break;
-
 				case "Türkis":
 					farbe = Color.rgb(64, 224, 208);
 					break;

@@ -5,9 +5,9 @@ gewinnt.
 
 ## ⬇️ Herunterladen
 
-[👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.0-beta/viergewinnt-windows.jar)  
-[👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.0-beta/viergewinnt-linux.jar)  
-[👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.0-beta/viergewinnt-macos.jar)  
+[👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.1-beta/viergewinnt-windows.jar)  
+[👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.1-beta/viergewinnt-linux.jar)  
+[👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.1-beta/viergewinnt-macos.jar)  
 [👉 Server herunterladen](https://github.com/Hobb8s/viergewinnt/tree/main/server#readme)
 
 ## 🎮 Spielweise
@@ -58,6 +58,15 @@ Server und gelangen dann zum Spielfeld und beim Button "Server herunterladen"
 lädt man den Server herunter. Sobald man beim Spielfeld ist, funktioniert es
 genauso wie beim Singleplayer. Wenn ein Spieler vier oder mehr chips in einer
 Reihe hat, hat dieser gewonnen und es taucht eine Siegesnachricht auf
+
+### Empfolenen Systemanforderungen
+
+|               | Singelplayer                      | Multiplayer                       | Server |
+| ------------- | --------------------------------- | --------------------------------- | --- |
+| Betriebsystem | Windows x64, Linux x64, MacOS x64 | Windows x64, Linux x64, MacOS x64 | Windows x64, Linux x64, MacOS x64, Docker |
+| CPU           | AMD Ryzen 3 1200                  | AMD Ryzen 3 1200                  | AMD Ryzen 3 1200 |
+| RAM           | 4 GB                              | 4 GB                              | 8 GB |
+| Sontiges      | Java@16                           | Java@16, Internetverbindung       |  |
 
 #### 🔥 Entwickelt von
 

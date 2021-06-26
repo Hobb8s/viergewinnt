@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class VierGewinnt {
 
 	// Array mit den verschiedenen möglichen Farben der Spieler
-	public static String[] farben = { "Rot", "Orange", "Gelb", "Grün", "Blau", "Schwarz", "Türkis", "Magenta" };
+	public static String[] farben = { "Rot", "Orange", "Gelb", "Grün", "Blau", "Türkis", "Magenta" };
 
 	// Spielfeld
 	private static ArrayList<Integer>[] spielfeld;

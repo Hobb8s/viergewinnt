@@ -78,8 +78,9 @@ public class Singleplayer implements Initializable {
         }
     }
 
-    // Weiterleitung zur startBildschirm.fxml
-    public void singlezurück() throws IOException {
+    // Zurückgelangen zur startBildschirm.fxml
+    public void singlezurück() throws IOException
+    {
         App.setRoot("startBildschirm");
     }
 
@@ -123,14 +124,6 @@ public class Singleplayer implements Initializable {
             case "Blau":
                 try {
                     VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.BLUE);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case "Schwarz":
-                try {
-                    VierGewinnt.spielerHinzufuegen(single_namenswahl1.getText(), Color.BLACK);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -202,14 +195,6 @@ public class Singleplayer implements Initializable {
             case "Blau":
                 try {
                     VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLUE);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case "Schwarz":
-                try {
-                    VierGewinnt.spielerHinzufuegen(single_namenswahl2.getText(), Color.BLACK);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

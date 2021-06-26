@@ -249,11 +249,11 @@ public class Spiel implements Initializable {
 
 
 	// zeit = Zeit, die ein Spieler zum Ausführen eines Zuges besitzt
-	private int zeit = 20;
+	private int zeit = 30;
 
 	// verbleibendeZeit = Zeit, die dem aktiven Spieler verbleibt, um den Spielzug
 	// durchzuführen
-	private int verbleibendeZeit = 20;
+	private int verbleibendeZeit = 30;
 
 	// Pausezahl: Zahl, die den aktuellen Stand ausgibt:
 	// 			  0 & 2 = Zeit steht bzw. läuft nicht (Unterschied: Text -> Start bei 0 und Weiter bei 2)
@@ -436,7 +436,7 @@ public class Spiel implements Initializable {
 	}
 
 	//Der Spieler wechselt nach Ausführung eines Spielzuges und die für den Zug zur verfügung stehende Zeit wird
-	// auf 20 Sekunden gesetzt
+	// auf 30 Sekunden gesetzt
 	private void spielerWechseln() {
 		verbleibendeZeit = zeit;
 		VierGewinnt.spielerWechseln();
