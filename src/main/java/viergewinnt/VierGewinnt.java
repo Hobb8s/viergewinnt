@@ -149,6 +149,7 @@ public class VierGewinnt {
 		}
 
 		if (richtung == "rechtsoben") {
+			System.out.println("#");
 			return x >= 0 && x + 3 < spielfeld.length && y >= 0 && y + 3 < 6;
 		}
 
@@ -157,6 +158,7 @@ public class VierGewinnt {
 		}
 
 		if (richtung == "linksoben") {
+			System.out.println("+");
 			return x - 3 >= 0 && x < spielfeld.length && y >= 0 && y + 3 < 6;
 		}
 
@@ -185,6 +187,7 @@ public class VierGewinnt {
 		}
 
 		if (richtung == "rechtsoben") {
+			System.out.println("##");
 			return VierGewinnt.spielfeld[x + 1].size() > y + 1 && VierGewinnt.spielfeld[x + 2].size() > y + 2
 					&& VierGewinnt.spielfeld[x + 3].size() > y + 3;
 		}
@@ -195,6 +198,7 @@ public class VierGewinnt {
 		}
 
 		if (richtung == "linksoben") {
+			System.out.println("++");
 			return VierGewinnt.spielfeld[x - 1].size() > y + 1 && VierGewinnt.spielfeld[x - 2].size() > y + 2
 					&& VierGewinnt.spielfeld[x - 3].size() > y + 3;
 		}
@@ -256,6 +260,7 @@ public class VierGewinnt {
 		}
 
 		if (richtung == "rechtsoben") {
+			System.out.println("###");
 			return VierGewinnt.spielfeld[x].get(y) == getAktivenSpieler().id
 					&& VierGewinnt.spielfeld[x + 1].get(y + 1) == getAktivenSpieler().id
 					&& VierGewinnt.spielfeld[x + 2].get(y + 2) == getAktivenSpieler().id
@@ -270,6 +275,7 @@ public class VierGewinnt {
 		}
 
 		if (richtung == "linksoben") {
+			System.out.println("+++");
 			return VierGewinnt.spielfeld[x].get(y) == getAktivenSpieler().id
 					&& VierGewinnt.spielfeld[x - 1].get(y + 1) == getAktivenSpieler().id
 					&& VierGewinnt.spielfeld[x - 2].get(y + 2) == getAktivenSpieler().id
