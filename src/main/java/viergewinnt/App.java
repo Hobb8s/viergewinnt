@@ -25,6 +25,7 @@ public class App extends Application {
         stage.getIcons().add(new Image(App.class.getResource("VierGewinntIcon.jpg").toExternalForm()));
         stage.setTitle("4-Gewinnt");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
 
         app = this;

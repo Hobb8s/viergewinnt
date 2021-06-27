@@ -3,14 +3,12 @@
 - [Projektdokumentation](#projektdokumentation)
   - [verschiedene Spielmodi](#verschiedene-spielmodi)
   - [Interaktion zwischen Server und Client](#interaktion-zwischen-server-und-client)
-  - [Zeitlicher Verlauf](#Zeitlicher-Verlauf)
-  - [Organisationsplan](#Organisationsplan)
-  - [Entwurfsmethode](#Entwurfsmethode)
-  - [Aufgewandet Resourcen](#Aufgewandet-Resourcen)
-  - [GitHub](#GitHub)
-  - [Github Workflow](#GitHub-Workflow)
-
-
+  - [Zeitlicher Verlauf](#zeitlicher-verlauf)
+  - [Organisationsplan](#organisationsplan)
+  - [Entwurfsmethode](#entwurfsmethode)
+  - [Aufgewandet Resourcen](#aufgewandet-resourcen)
+  - [GitHub](#github)
+  - [GitHub Workflow](#github-workflow)
 ##  verschiedene Spielmodi
 
 Es gibt einmal einen Single-Modus, in dem man zu zweit auf einem Endgrät spielen kann.  
@@ -27,6 +25,7 @@ Der Server kann unbegrenzt viele Verbindungen mit Clients aufbauen. Alle Verbind
 ![Räume](https://socket.io/images/rooms.png)
 
 Wenn der Server ein Event von einem Client empfängt, kann der Server eine Antwort zu allen Raummitgliedern senden.
+Die Clients können dadurch miteinander komunizieren.
 
 
 ##  Zeitlicher Verlauf
