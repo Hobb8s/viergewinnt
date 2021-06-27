@@ -5,9 +5,9 @@ gewinnt.
 
 ## ⬇️ Herunterladen
 
-[👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.3-beta/viergewinnt-windows.jar)  
-[👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.3-beta/viergewinnt-linux.jar)  
-[👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/v0.9.3-beta/viergewinnt-macos.jar)  
+[👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/v1.0/viergewinnt-windows.jar)  
+[👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/v1.0/viergewinnt-linux.jar)  
+[👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/v1.0/viergewinnt-macos.jar)  
 [👉 Server herunterladen](https://github.com/Hobb8s/viergewinnt/tree/main/server#readme)  
   
 
