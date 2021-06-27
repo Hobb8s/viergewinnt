@@ -315,7 +315,7 @@ public class VierGewinnt {
 				continue;
 
 			x += lg.getValue0();
-			y += lg.getValue0();
+			y += lg.getValue1();
 
 			if (sindVierInEinerReihe(x, y))
 				return true;

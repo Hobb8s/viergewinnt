@@ -8,7 +8,10 @@ gewinnt.
 [👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/{{tag}}/viergewinnt-windows.jar)  
 [👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/{{tag}}/viergewinnt-linux.jar)  
 [👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/{{tag}}/viergewinnt-macos.jar)  
-[👉 Server herunterladen](https://github.com/Hobb8s/viergewinnt/tree/main/server#readme)
+[👉 Server herunterladen](https://github.com/Hobb8s/viergewinnt/tree/main/server#readme)  
+  
+
+[👉 Java@16](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html) (Wird benötigt um Viergewinnt auszuführen)  
 
 ## 🎮 Spielweise
 
@@ -59,15 +62,15 @@ lädt man den Server herunter. Sobald man beim Spielfeld ist, funktioniert es
 genauso wie beim Singleplayer. Wenn ein Spieler vier oder mehr chips in einer
 Reihe hat, hat dieser gewonnen und es taucht eine Siegesnachricht auf
 
-### Empfolenen Systemanforderungen
+## 🖥️ Empfolenen Systemanforderungen
 
-|               | Singelplayer                      | Multiplayer                       | Server |
-| ------------- | --------------------------------- | --------------------------------- | --- |
+|               | Singelplayer                      | Multiplayer                       | Server                                    |
+| ------------- | --------------------------------- | --------------------------------- | ----------------------------------------- |
 | Betriebsystem | Windows x64, Linux x64, MacOS x64 | Windows x64, Linux x64, MacOS x64 | Windows x64, Linux x64, MacOS x64, Docker |
-| CPU           | AMD Ryzen 3 1200                  | AMD Ryzen 3 1200                  | AMD Ryzen 3 1200 |
-| RAM           | 4 GB                              | 4 GB                              | 8 GB |
-| Sontiges      | Java@16                           | Java@16, Internetverbindung       |  |
+| CPU           | AMD Ryzen 3 1200                  | AMD Ryzen 3 1200                  | AMD Ryzen 3 1200                          |
+| RAM           | 4 GB                              | 4 GB                              | 8 GB                                      |
+| Sontiges      | Java@16                           | Java@16, Internetverbindung       | Internetverbindung                        |
 
-#### 🔥 Entwickelt von
+## 🔥 Entwickelt von
 
 Paul Hüllmandel, Felix Wochnick, Moritz Löbmann und Robin Eisenmann
