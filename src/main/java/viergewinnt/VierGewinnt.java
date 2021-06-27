@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
+import org.javatuples.Pair;
+
 public class VierGewinnt {
 
 	// Array mit den verschiedenen möglichen Farben der Spieler
@@ -25,14 +27,14 @@ public class VierGewinnt {
 		return spieler;
 	}
 
-	//Der aktive Spieler, ist der Spieler, der den aktuellen Spielzug ausführt
+	// Der aktive Spieler, ist der Spieler, der den aktuellen Spielzug ausführt
 	private static int aktivenSpieler = 0;
 
 	public static Spieler getAktivenSpieler() {
 		return spieler.get(aktivenSpieler);
 	}
 
-	//Der passive Spieler, ist der Spieler, der den nächsten Spielzug ausführt
+	// Der passive Spieler, ist der Spieler, der den nächsten Spielzug ausführt
 	public static Spieler getpassivenSpieler() {
 		return spieler.get(1 - aktivenSpieler);
 	}
@@ -135,7 +137,7 @@ public class VierGewinnt {
 		return null;
 	}
 
-	//Überprüfung, ob sich der Spielstein im Spielfeld befindet
+	// Überprüfung, ob sich der Spielstein im Spielfeld befindet
 	private static boolean istImFeld(int x, int y, String richtung) {
 
 		if (richtung == "unten") {
@@ -169,7 +171,8 @@ public class VierGewinnt {
 		return false;
 	}
 
-	//Überprüft die Anzahl der Steine und schließt anschließend unmögliche Gewinnmöglichkeiten aus
+	// Überprüft die Anzahl der Steine und schließt anschließend unmögliche
+	// Gewinnmöglichkeiten aus
 	private static boolean überprüfeAnzahlSteine(int x, int y, String richtung) {
 
 		if (richtung == "unten") {
@@ -209,31 +212,33 @@ public class VierGewinnt {
 		return false;
 	}
 
-	//Überprüft, ob die Steine in die linke Richtung vom selben Spieler gelegt wurden
-	private static String linksGleich(int x, int y, ArrayList<String> richtung) {
+	// Überprüft, ob die Steine in die linke Richtung vom selben Spieler gelegt
+	// wurden
+	private static Pair<Integer, Integer> linksGleich(int x, int y, String richtung) {
 
-		if (richtung.contains("links") && x - 1 >= 0 && x < spielfeld.length && y >= 0 && y < 6
+		if (richtung == "links" && x - 1 >= 0 && x < spielfeld.length && y >= 0 && y < 6
 				&& VierGewinnt.spielfeld[x - 1].size() > y
 				&& VierGewinnt.spielfeld[x - 1].get(y) == getAktivenSpieler().id) {
-			return "links";
+			return new Pair<Integer, Integer>(-1, 0);
 		}
 
-		if (richtung.contains("linksoben") && x - 1 >= 0 && x < spielfeld.length && y >= 0 && y + 1 < 6
+		if (richtung == "linksoben" && x - 1 >= 0 && x < spielfeld.length && y >= 0 && y + 1 < 6
 				&& VierGewinnt.spielfeld[x - 1].size() > y + 1
 				&& VierGewinnt.spielfeld[x - 1].get(y + 1) == getAktivenSpieler().id) {
-			return "linksoben";
+			return new Pair<Integer, Integer>(-1, 1);
 		}
 
-		if (richtung.contains("linksunten") && x - 1 >= 0 && x < spielfeld.length && y - 1 >= 0 && y < 6
+		if (richtung == "linksunten" && x - 1 >= 0 && x < spielfeld.length && y - 1 >= 0 && y < 6
 				&& VierGewinnt.spielfeld[x - 1].size() > y - 1
 				&& VierGewinnt.spielfeld[x - 1].get(y - 1) == getAktivenSpieler().id) {
-			return "linksunten";
+			return new Pair<Integer, Integer>(-1, -1);
 		}
 
 		return null;
 	}
 
-	//Überprüfung, ob vier Steine, die in einer Reihe liegen, vom selben Spieler gelegt wurden
+	// Überprüfung, ob vier Steine, die in einer Reihe liegen, vom selben Spieler
+	// gelegt wurden
 	private static boolean überprüfeSteineVonSpielern(int x, int y, String richtung) {
 
 		if (richtung == "unten") {
@@ -290,49 +295,31 @@ public class VierGewinnt {
 		return false;
 	}
 
-
-	//Überprüfung, ob vier Spielsteine in einer Reihe sind (egal ob horizontal, vertikal oder diagonal)
-	private static boolean sindVierInEinerReihe(int x, int y) {
+	// Überprüfung, ob vier Spielsteine in einer Reihe sind (egal ob horizontal,
+	// vertikal oder diagonal)
+	private static boolean sindVierInEinerReihe(int xs, int ys) {
 
 		String[] richtungen = new String[] { "unten", "rechts", "links", "rechtsoben", "rechtsunten", "linksoben",
 				"linksunten" };
 
-		ArrayList<String> möglich = new ArrayList<String>();
-
-		möglich.add("links");
-		möglich.add("linksoben");
-		möglich.add("linksunten");
-
 		for (int i = 0; i < richtungen.length; i++) {
-			if (istImFeld(x, y, richtungen[i]) && überprüfeAnzahlSteine(x, y, richtungen[i]) && überprüfeSteineVonSpielern(x, y, richtungen[i]))
+			int x = xs;
+			int y = ys;
+
+			if (istImFeld(x, y, richtungen[i]) && überprüfeAnzahlSteine(x, y, richtungen[i])
+					&& überprüfeSteineVonSpielern(x, y, richtungen[i]))
 				return true;
 
-			String lg = linksGleich(x, y, möglich);
-			while (lg != null) {
-				switch (lg) {
-					case "links":
-						möglich.clear();
-						möglich.add("links");
-						x = x - 1;
-						break;
+			Pair<Integer, Integer> lg = linksGleich(x, y, richtungen[i]);
+			if (lg == null)
+				continue;
 
-					case "linksoben":
-						möglich.clear();
-						möglich.add("linksoben");
-						x = x - 1;
-						y = y + 1;
-						break;
+			x += lg.getValue0();
+			y += lg.getValue0();
 
-					case "linksunten":
-						möglich.clear();
-						möglich.add("linksunten");
-						x = x - 1;
-						y = y - 1;
-						break;
-				}
+			if (sindVierInEinerReihe(x, y))
+				return true;
 
-				lg = linksGleich(x, y, möglich);
-			}
 		}
 
 		return false;

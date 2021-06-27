@@ -25,76 +25,52 @@ public class Singleplayer implements Initializable {
     // Fehlermeldung
     public void singleweiter() {
 
-        //Abfrage, die überprüft, ob zwei unterschiedliche Namen eingegeben wurden
+        // Abfrage, die überprüft, ob zwei unterschiedliche Namen eingegeben wurden
         if (single_namenswahl1.getText() == null || single_namenswahl2.getText() == null
                 || single_namenswahl1.getText().equals(single_namenswahl2.getText())) {
             Alert keinName = new Alert(Alert.AlertType.INFORMATION);
             keinName.setTitle("Fehler");
             keinName.setContentText("Geben Sie bitte zwei unterschiedliche Namen ein!");
-            keinName.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("OK gedrückt.");
-                }
-            });
-        }
-        else
-        {
-            //Abfrage, die überprüft, ob unterschiedliche Farben ausgewählt wurden
-            if (single_farbwahl1.getValue() == single_farbwahl2.getValue()) {
-                Alert gleicheFarbe = new Alert(Alert.AlertType.INFORMATION);
-                gleicheFarbe.setTitle("Fehler");
-                gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
-                gleicheFarbe.showAndWait().ifPresent(rs -> {
-                    if (rs == ButtonType.OK) {
-                        System.out.println("OK gedrückt.");
-                    }
-                });
-            }
-            else {
+        } else if (single_farbwahl1.getValue() == single_farbwahl2.getValue()) {
+            Alert gleicheFarbe = new Alert(Alert.AlertType.INFORMATION);
+            gleicheFarbe.setTitle("Fehler");
+            gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
+        } else if (single_farbwahl1.getValue() == null || single_farbwahl2.getValue() == null) {
+            Alert gleicheFarbe = new Alert(Alert.AlertType.ERROR);
+            gleicheFarbe.setTitle("Fehler");
+            gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
+        } else {
 
-                //Abfrage, die überprüft, ob Farben ausgewählt wurden
-                if (single_farbwahl1.getValue() == null || single_farbwahl2.getValue() == null) {
-                    Alert gleicheFarbe = new Alert(Alert.AlertType.ERROR);
-                    gleicheFarbe.setTitle("Fehler");
-                    gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
-                    gleicheFarbe.showAndWait().ifPresent(rs -> {
-                        if (rs == ButtonType.OK) {
-                            System.out.println("OK gedrückt.");
-                        }
-                    });
-                } else {
-
-                    //Weiterleitung zur spiel.fxml, sofern unterschiedliche Namen und Farben ausgewählt wurden
-                    try {
-                        App.setRoot("spiel");
-                        FarbWahlSpieler1();
-                        FarbWahlSpieler2();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
+            // Weiterleitung zur spiel.fxml, sofern unterschiedliche Namen und Farben
+            // ausgewählt wurden
+            try {
+                FarbWahlSpieler1();
+                FarbWahlSpieler2();
+                App.setRoot("spiel");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
+
     }
 
     // Zurückgelangen zur startBildschirm.fxml
-    public void singlezurück() throws IOException
-    {
+    public void singlezurück() throws IOException {
         App.setRoot("startBildschirm");
     }
 
     // Einfügen des Array in die beiden Choice-Boxen
+    // Methode wird beim Starten der FXML-Datei ausgeführt
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        VierGewinnt.zuruecksetzen();
         single_farbwahl1.getItems().addAll(VierGewinnt.farben);
         single_farbwahl2.getItems().addAll(VierGewinnt.farben);
     }
 
     // Erstellen des ersten Spielers mit dem angegebenen Namen und der ausgewählten
     // Farbe
-    public void FarbWahlSpieler1() throws IOException {
-        VierGewinnt.zuruecksetzen();
+    public void FarbWahlSpieler1() {
         String farbe1 = single_farbwahl1.getValue();
 
         switch (farbe1) {
@@ -112,6 +88,7 @@ public class Singleplayer implements Initializable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
 
             case "Grün":
                 try {
