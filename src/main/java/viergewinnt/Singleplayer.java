@@ -25,20 +25,27 @@ public class Singleplayer implements Initializable {
     // Fehlermeldung
     public void singleweiter() {
 
+        System.out.println(single_farbwahl1.getValue().equals(single_farbwahl2.getValue()));
+        System.out.println(single_farbwahl1.getValue());
+        System.out.println(single_farbwahl2.getValue());
+
         // Abfrage, die überprüft, ob zwei unterschiedliche Namen eingegeben wurden
         if (single_namenswahl1.getText() == null || single_namenswahl2.getText() == null
                 || single_namenswahl1.getText().equals(single_namenswahl2.getText())) {
             Alert keinName = new Alert(Alert.AlertType.INFORMATION);
             keinName.setTitle("Fehler");
+            keinName.showAndWait();
             keinName.setContentText("Geben Sie bitte zwei unterschiedliche Namen ein!");
-        } else if (single_farbwahl1.getValue() == single_farbwahl2.getValue()) {
+        } else if (single_farbwahl1.getValue().equals(single_farbwahl2.getValue())) {
             Alert gleicheFarbe = new Alert(Alert.AlertType.INFORMATION);
             gleicheFarbe.setTitle("Fehler");
             gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
+            gleicheFarbe.showAndWait();
         } else if (single_farbwahl1.getValue() == null || single_farbwahl2.getValue() == null) {
             Alert gleicheFarbe = new Alert(Alert.AlertType.ERROR);
             gleicheFarbe.setTitle("Fehler");
             gleicheFarbe.setContentText("Wählen Sie bitte zwei unterschiedliche Farben aus!");
+            gleicheFarbe.showAndWait();
         } else {
 
             // Weiterleitung zur spiel.fxml, sofern unterschiedliche Namen und Farben
@@ -68,10 +75,12 @@ public class Singleplayer implements Initializable {
         single_farbwahl2.getItems().addAll(VierGewinnt.farben);
     }
 
+
     // Erstellen des ersten Spielers mit dem angegebenen Namen und der ausgewählten
     // Farbe
     public void FarbWahlSpieler1() {
         String farbe1 = single_farbwahl1.getValue();
+
 
         switch (farbe1) {
             case "Rot":
@@ -132,6 +141,7 @@ public class Singleplayer implements Initializable {
 
         }
     }
+
 
     // Erstellen des zweiten Spielers mit dem angegebenen Namen und der ausgewählten
     // Farbe
