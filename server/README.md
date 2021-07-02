@@ -6,10 +6,10 @@ Der Server erstellt für jedes Spiel einen eigenen Raum mit maximal 2 Clients ( 
 
 ## Herunterladen
 
-[👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/v1.0/viergewinnt-server-windows.exe)  
-[👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/v1.0/viergewinnt-server-macos)  
-[👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/v1.0/viergewinnt-server-linux)  
-[🐳 Dockerimage](https://github.com/Hobb8s/viergewinnt/releases/download/v1.0/viergewinnt-docker.tar)  
+[👉 Windows](https://github.com/Hobb8s/viergewinnt/releases/download/v1.1/viergewinnt-server-windows.exe)  
+[👉 Mac OS X](https://github.com/Hobb8s/viergewinnt/releases/download/v1.1/viergewinnt-server-macos)  
+[👉 Linux](https://github.com/Hobb8s/viergewinnt/releases/download/v1.1/viergewinnt-server-linux)  
+[🐳 Dockerimage](https://github.com/Hobb8s/viergewinnt/releases/download/v1.1/viergewinnt-docker.tar)  
 
 ## Anleitung
 
